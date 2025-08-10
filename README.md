@@ -1,12 +1,36 @@
-# Vapor
+<div align="center">
+    <h1 align="center">Halo Theme Vapor</h1>
+    <a href="https://halo.zhheo.com/" target="_blank" rel="noopener noreferrer">
+        <img src="https://github.com/user-attachments/assets/3844b1fe-0967-4dc6-862a-99d0dbaac9df" alt="icon"/>
+    </a>
+</div>
 
-主题开发文档可查阅：<https://docs.halo.run/2.0.0-SNAPSHOT/developer-guide/theme/prepare>
+## 🎊 声明
+Vapor是一个简约风格的博客主题
+- 主题移植于： <a href="https://cali.so">Cali 的个人博客网站</a>
+- 代码仓库：[Cali 的Github](https://github.com/CaliCastle/cali.so)
 
-## 特性
+## 🔥 预览
 
-- 使用 [Vite](https://vitejs.dev/) 进行静态资源构建。
-- 使用 [Tailwind CSS](https://tailwindcss.com/) 进行样式开发。
-- 使用 [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) 作为内容样式。
-- 使用 [Iconify](https://iconify.design/) + [@iconify/tailwind](https://iconify.design/docs/usage/css/tailwind/#installation) 作为图标方案。
-- 集成了 [Alpine.js](https://alpinejs.dev/)。
-- 集成了 ESLint + Prettier。
+| 站点名称 | 站点地址                     |
+| :------: | :--------------------------- |
+| 三禾木木 | https://halo.scott-studio.cn |
+
+## 🔌 插件依赖
+
+- THYUU 区块 [plugin-thyuu-embed](https://www.halo.run/store/apps/app-lKYuv)
+- 友链自助提交 [link-submit](https://www.halo.run/store/apps/app-glejqzwk)
+- 链接管理 [plugin-links](https://www.halo.run/store/apps/app-hfbQg)
+
+> 更多插件请参见：https://github.com/halo-sigs/awesome-halo
+
+## 💬 讨论
+
+如果你对主题有什么建议或者意见，欢迎提 PR & issue。
+
+- QQ: 2406177615 (添加请备注来意)
+
+## 💰 赞助
+
+**如果 Halo-theme-vapor 主题对你有帮助，欢迎赞助相关开发者**
+- 三禾木木 [爱发电赞助](https://afdian.com/a/scottstudio)
