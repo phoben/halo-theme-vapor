@@ -1,0 +1,187 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: theme-vapor-setting
+spec:
+  forms:
+    - group: layout
+      label: 首页
+      formSchema:
+        - $formkit: attachment
+          name: home_avatar
+          id: home_avatar
+          key: home_avatar
+          label: 首页展示头像
+          value: ""
+        - $formkit: code
+          language: html
+          height: 200px
+          name: home_slogan
+          id: home_slogan
+          key: home_slogan
+          label: 首页介绍词
+
+        - $formkit: number
+          name: featured_focus_num
+          id: featured_focus_num
+          key: featured_focus_num
+          label: 推荐阅读｜数量
+          value: 6
+          min: 0
+          help: 默认 6 条。输入 0 则关闭该板块。
+          validation: required
+
+        - $formkit: text
+          name: blogger_keywords
+          id: blogger_keywords
+          key: blogger_keywords
+          label: 博主介绍关键词
+          value: 开发者,攻城狮,细节控,写博客
+
+        - $formkit: repeater
+          name: home_links
+          label: 社交链接
+          value:
+            - value: twitter
+            - value: youtube
+            - value: bilibili
+            - value: github
+            - value: telegram
+            - value: email
+          children:
+            - $formkit: select
+              name: value
+              label: 类型
+              options:
+                - label: Twitter链接
+                  value: twitter
+                - label: Youtube链接
+                  value: youtube
+                - label: Bilibili链接
+                  value: bilibili
+                - label: Github链接
+                  value: github
+                - label: Telegram链接
+                  value: telegram
+                - label: 首页邮箱
+                  value: email
+            - $formkit: text
+              name: home_links_url
+              label: 链接
+
+    - group: style
+      label: 样式&文案
+      formSchema:
+        - $formkit: select
+          name: color_scheme
+          label: 默认配色
+          value: system
+          options:
+            - label: 跟随系统
+              value: system
+            - label: 深色
+              value: dark
+            - label: 浅色
+              value: light
+
+        - $formkit: checkbox
+          name: enable_change_color_scheme
+          label: 允许访客切换配色
+          value: true
+
+        - $formkit: text
+          name: archive_title
+          label: 文章归档介标题
+          value: 欢迎光临我的博客
+          validation: required
+        - $formkit: code
+          name: archive_slogan
+          label: 文章归档介绍词
+          height: 200px
+          language: html
+          value: '<span style="display: inline-block;vertical-align: top;text-decoration: inherit;text-wrap: balance;">
+            🌿
+            欢迎闯入这片文字森林！这里收纳着每一篇用心书写的故事、思考与感悟，像散落的星光等待被点亮。无论你是寻觅共鸣的同频者，还是偶然驻足的旅人，都请随意翻阅
+            —— 或许下一篇，就藏着你想遇见的温度与答案～
+            </span>'
+
+    - group: links
+      label: 友链页
+      formSchema:
+        - $formkit: text
+          name: title
+          label: 标题
+          value: 友链
+          validation: required
+        - $formkit: text
+          name: description
+          label: 描述
+          value: 我非常并且迫切地希望能在您热情地提交之前，看到我们的交流互动，生活博客比较看重仪式感，所以不妨让我们互相了解使得连接更紧实吧。
+        - $formkit: code
+          name: content
+          label: 内容
+          height: 200px
+          language: html
+          value: '<p style="font-weight: 400;">很高兴能和非常多的朋友们交流，如果你也想加入友链，可以点击下方添加按钮进行申请。<mark>（本站已开启友链提交自动审核，您的链接将会第一时间被添加。）</mark></p><div style="height:1rem" aria-hidden="true" class="wp-block-spacer"></div><ul class="wp-block-list thyuu-block"><li>1. 交流互动并且保持联系（重点）；</li><li>2. 至少有 10 篇原创文章；</li><li>3. 请提前做好本站链接。</li></ul>'
+        - $formkit: text
+          name: admin_email
+          label: 邮箱
+          validation: required
+
+    - group: footer
+      label: 页脚
+      formSchema:
+        - $formkit: repeater
+          name: sfooter_info
+          label: 底部信息
+          value:
+            - sf_title: 鄂ICP备xxxxxxx号
+              sf_link: https://beian.miit.gov.cn/
+              sf_img: /themes/scottstudio-vapor/assets/imgs/icpb.webp
+          children:
+            - $formkit: text
+              name: sf_title
+              label: 信息文本
+            - $formkit: text
+              name: sf_link
+              label: 信息链接
+            - $formkit: attachment
+              name: sf_img
+              label: 图标
+              accepts:
+                - "image/*"
+        - $formkit: checkbox
+          name: show_stats
+          key: show_stats
+          id: show_stats
+          label: 显示统计信息
+          value: true
+          help: 在站点底部显示全站的统计信息
+
+    - group: custom
+      label: 扩展设置
+      formSchema:
+        - $formkit: textarea
+          name: keywords
+          label: SEO关键词
+          rows: 3
+        - $formkit: code
+          name: code_css
+          label: 自定义CSS代码
+          height: 200px
+          language: css
+        - $formkit: code
+          name: code_js
+          label: 自定义JavaScript代码
+          height: 200px
+          language: javascript
+        - $formkit: code
+          name: head_html
+          label: 自定义HTML代码-头部
+          height: 200px
+          language: html
+        - $formkit: code
+          name: footer_html
+          label: 自定义HTML代码-底部
+          height: 200px
+          language: html

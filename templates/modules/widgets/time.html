@@ -1,0 +1,20 @@
+<th:block th:fragment="time(date)">
+  <th:block
+    th:with="diffMillis=${new java.util.Date().getTime() - date.toEpochMilli()},
+                        minutes=${diffMillis/60000},
+                        hours=${minutes/60},
+                        days=${diffMillis/86400000},
+                        weeks=${days/7},
+                        months=${days/30},
+                        years=${days/365}"
+  >
+    <th:block th:if="${days == 0}">
+      <th:block th:if="${minutes >= 1 && minutes < 60}">[[${minutes}+'分钟前']]</th:block>
+      <th:block th:if="${minutes >= 60 && hours < 24}">[[${hours}+'小时前']]</th:block>
+    </th:block>
+    <th:block th:if="${days >= 1 && days < 7}">[[${days}+'日前']]</th:block>
+    <th:block th:if="${days >= 7 && days <= 30}">[[${weeks}+'周前']]</th:block>
+    <th:block th:if="${days > 30 && days <= 365}">[[${months}+'月前']]</th:block>
+    <th:block th:if="${days > 365}">[[${#dates.format(date, 'yyyy-MM-dd')}]]</th:block>
+  </th:block>
+</th:block>

@@ -1,0 +1,85 @@
+<script
+  type="text/javascript"
+  th:src="@{/assets/fancy/index.umd.js?ver={version}(version=${theme.spec.version})}"
+  id="fancybox-js"
+></script>
+<script
+  type="text/javascript"
+  th:src="@{/assets/fancy/fancybox/i10n/zh_CN.umd.js?ver={version}(version=${theme.spec.version})}"
+  id="fancybox-cn-js"
+></script>
+<script
+  type="text/javascript"
+  th:src="@{/assets/fancy/carousel/i10n/zh_CN.umd.js?ver={version}(version=${theme.spec.version})}"
+  id="carousel-cn-js"
+></script>
+<script>
+  // FancyAPP 初始化
+  Fancybox.defaults = {
+    ...Fancybox.defaults,
+    l10n: Fancybox.l10n.zh_CN,
+    hideScrollbar: false,
+    Images: {
+      initialSize: "fit",
+      zoom: false,
+    },
+  };
+  Fancybox.bind("[data-fancybox]", {
+    ...Fancybox.defaults,
+    autoFocus: false,
+    dragToClose: false,
+    tpl: {
+      closeButton:
+        '<div class="text-center"><button data-fancybox-close class="button close iconfont icon-bottom has-thyuu-color has-btn-effect" title="关闭"><span class="btn-meta">关闭</span></button></div>',
+    },
+  });
+  Fancybox.bind('[data-fancybox="div"]', {
+    ...Fancybox.defaults,
+    defaultType: "html",
+    defaultDisplay: "block",
+    mainClass: "thyuu-div",
+    closeExisting: true,
+    autoFocus: false,
+    groupAttr: false,
+    dragToClose: false,
+    tpl: {
+      closeButton:
+        '<div class="text-center"><button data-fancybox-close class="button close iconfont icon-bottom has-thyuu-color has-btn-effect" title="关闭"><span class="btn-meta">关闭</span></button></div>',
+    },
+  });
+  Fancybox.bind('[data-fancybox="tip"]', {
+    ...Fancybox.defaults,
+    mainClass: "thyuu-tip",
+    Toolbar: false,
+    width: 400,
+  });
+  Fancybox.bind('[data-fancybox="gallery"]', {
+    ...Fancybox.defaults,
+    Carousel: {
+      transition: "classic",
+    },
+    Thumbs: {
+      type: "classic",
+    },
+    Toolbar: {
+      display: {
+        absolute: true,
+        left: ["slideshow", "infobar"],
+        middle: ["toggle1to1", "rotateCW", "flipX", "flipY"],
+        right: ["fullscreen", "thumbs", "close"],
+      },
+    },
+    caption: function (fancybox, slide) {
+      const figcaption = slide.triggerEl?.nextElementSibling;
+      slide.triggerEl.alt = figcaption ? figcaption.textContent : slide.triggerEl.alt || "";
+      return figcaption ? figcaption.innerHTML : null;
+    },
+  });
+  Carousel.defaults = {
+    ...Carousel.defaults,
+    l10n: Carousel.l10n.zh_CN,
+    slidesPerPage: "auto",
+    transition: "classic",
+    center: false,
+  };
+</script>

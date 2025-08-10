@@ -1,0 +1,37 @@
+<th:block th:fragment="page(path,pageInfo)">
+  <nav th:if="${pageInfo.totalPages > 1}" class="navigation page-navigation mt-[1em]" role="navigation">
+    <a class="prev page-numbers" th:if="${pageInfo.hasPrevious}" th:href="@{${pageInfo.prevUrl}}">
+      <button class="button prev has-thyuu-color has-btn-effect">
+        <span class="btn-meta">上一页</span>
+      </button>
+    </a>
+    <th:block th:if="${pageInfo.page > 2}">
+      <a class="page-numbers" th:href="${path+'/page/1'}">1</a>
+      <span class="page-numbers dots" th:if="${pageInfo.page != 3}">…</span>
+    </th:block>
+    <th:block th:each="index:${#numbers.sequence(pageInfo.page-1,pageInfo.page+1)}">
+      <span
+        aria-current="page"
+        class="page-numbers current"
+        th:if="${pageInfo.page} == ${index}"
+        th:text="${pageInfo.page}"
+      ></span>
+      <a
+        th:unless="${pageInfo.page == index}"
+        th:if="${index > 0 && index <= pageInfo.totalPages}"
+        class="page-numbers"
+        th:href="${path+'/page/'+index}"
+        th:text="${index}"
+      ></a>
+    </th:block>
+    <th:block th:if="${pageInfo.totalPages - pageInfo.page >= 2}">
+      <span class="page-numbers dots" th:if="${pageInfo.totalPages - pageInfo.page != 2}">…</span>
+      <a class="page-numbers" th:href="${path+'/page/'+pageInfo.totalPages}" th:text="${pageInfo.totalPages}"></a>
+    </th:block>
+    <a class="next page-numbers" th:if="${pageInfo.hasNext}" th:href="@{${pageInfo.nextUrl}}">
+      <button class="button next has-thyuu-color has-btn-effect">
+        <span class="btn-meta">下一页</span>
+      </button>
+    </a>
+  </nav>
+</th:block>

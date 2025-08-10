@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  scroll-padding-top: 3rem;
+}
+
+[data-radix-popper-content-wrapper] {
+  z-index: 99999 !important;
+}
+
+[data-floating-ui-portal] {
+  z-index: 100000;
+}
+
+::selection {
+  background-color: theme("colors.lime.500");
+  color: theme("colors.lime.950");
+}
+
+@keyframes typing-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+:root {
+  --vapor--nav-height: 3rem;
+  --primary-color: hsl(213, 100%, 48%);
+  --vapor--color-primary: 213 100% 48%;
+  --font-sans: "Manrope";
+}
+
+body {
+  background: var(--bg-color);
+}
+
+.rounded-theme {
+  border-radius: 1rem;
+}
+
+.shadow-nav {
+  box-shadow: rgba(0, 9, 50, 0.086) 0px 0.602187px 0.602187px -1.25px,
+    rgba(0, 9, 50, 0.075) 0px 2.28853px 2.28853px -2.5px, rgba(0, 9, 50, 0.03) 0px 10px 10px -3.75px;
+}
+
+.blur-before {
+  --trfm: scaleY(0.95) translateY(1rem);
+  --filter: blur(10px);
+  animation: var(--animation);
+  animation-duration: 0.5s;
+  animation-delay: var(--delay, 0.4s);
+}
+
+img:where(.load) {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+img:where(.loaded) {
+  opacity: 1;
+}
+
+/* =view transition route change animation
+----------------------------------------------- */
+@media (prefers-reduced-motion) {
+  ::view-transition-group(*),
+  ::view-transition-new(*),
+  ::view-transition-old(*) {
+    animation: none !important;
+  }
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-new(*),
+::view-transition-old(*) {
+  backface-visibility: hidden;
+  mix-blend-mode: normal;
+}
+
+@property --aspect--view-transition--progress {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: false;
+}
+
+@keyframes aspect-view-transition {
+  0% {
+    --aspect--view-transition--progress: 0;
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    --aspect--view-transition--progress: 1;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+::view-transition-old(root) {
+  animation: aspect-view-transition 0.6s cubic-bezier(0.35, 0, 0.4, 1);
+  animation-delay: 0s;
+  animation-fill-mode: both;
+}
+
+::view-transition-new(root) {
+  animation: aspect-view-transition 0.6s cubic-bezier(0.35, 0, 0.4, 1);
+  animation-fill-mode: both;
+  -webkit-mask-image: linear-gradient(
+    270deg,
+    #000 calc(-70% + 170% * var(--aspect--view-transition--progress)),
+    transparent calc(170% * var(--aspect--view-transition--progress))
+  );
+  mask-image: linear-gradient(
+    270deg,
+    #000 calc(-70% + 170% * var(--aspect--view-transition--progress)),
+    transparent calc(170% * var(--aspect--view-transition--progress))
+  );
+}

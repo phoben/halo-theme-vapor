@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(content = ~{::content}, page_js = ~{::page_js},_title = |标签：${tag.spec.displayName}|)}"
+>
+  <th:block th:fragment="content">
+    <div class="mt-20 sm:px-8">
+      <div class="mx-auto max-w-7xl lg:px-8">
+        <div class="mx-auto max-w-7xl lg:px-8">
+          <div class="relative px-4 md:px-0">
+            <div class="fade-before relative z-[2] mx-auto mt-5 max-w-7xl py-4 lg:py-6">
+              <div class="my-8">
+                <th:block th:replace="~{modules/tag-filter}" />
+              </div>
+              <div class="mt-[1em]">
+                <p class="text-sm text-zinc-400">[[${tag.postCount}]] posts</p>
+                <h2 class="mt-2 text-4xl font-semibold">
+                  [[${tag.spec.displayName}]]
+                  <span
+                    class="before:inline-block before:h-2 before:w-2 before:rounded-full before:bg-[#0887e7] before:align-[.2em] before:content-['']"
+                    style="color: #0887e7"
+                  ></span>
+                </h2>
+              </div>
+
+              <ul class="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
+                <li th:each="post : ${posts.items}">
+                  <th:block th:replace="~{modules/post-card :: post-card(post = ${post})}"></th:block>
+                </li>
+              </ul>
+
+              <th:block th:if="${posts.total == 0}">
+                <div class="fade-before relative z-[2] mx-auto mb-8 mt-[1em] max-w-md">
+                  <div
+                    class="relative rounded-2xl border border-zinc-100 p-6 transition-opacity dark:border-zinc-700/40"
+                  >
+                    <h2 class="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                      <i class="iconfont icon-tishi"></i>
+                      <span class="ml-2">此标签下没有文章</span>
+                    </h2>
+                    <p class="mt-2 text-xs text-zinc-600 md:text-sm dark:text-zinc-400">
+                      换个标签再继续搜索吧，获取你会在其他地方找到答案。
+                    </p>
+                  </div>
+                </div>
+              </th:block>
+              <!-- <div th:if="${posts.total == 0}" class="mt-6 flex items-center justify-center">
+                <span class="text-sm font-light text-zinc-600">此标签下没有文章</span>
+              </div> -->
+
+              <th:block th:replace="~{modules/widgets/pagination :: page(${tag.status.permalink},${posts})}"></th:block>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </th:block>
+</html>

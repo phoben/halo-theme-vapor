@@ -1,0 +1,29 @@
+<th:block th:fragment="page(post,kind)">
+  <script
+    type="text/javascript"
+    th:src="@{/assets/plugins/comment-widget/commentWidget.min.js?ver={version}(version=${theme.spec.version})}"
+  ></script>
+  <div id="respond"></div>
+  <div th:id="|comment-content-halo-run-Post-${post.metadata.name}|"></div>
+  <script>
+    commentWidget.init(`#comment-content-halo-run-Post-[[${post.metadata.name}]]`, {
+      group: "content.halo.run",
+      kind: "[[${kind}]]",
+      name: "[[${post.metadata.name}]]",
+      size: 10,
+      replySize: 10,
+      withReplies: true,
+      withReplySize: 10,
+      useAvatarProvider: true,
+      avatarProviderMirror: "https://weavatar.com",
+      avatarPolicy: "anonymousUser",
+      placeholder: "一句走心评论，胜过千言万语",
+    });
+  </script>
+
+  <script
+    type="text/javascript"
+    th:src="@{/assets/plugins/comment-widget/comment-reply.min.js?ver={version}(version=${theme.spec.version})}"
+    id="comment-reply"
+  ></script>
+</th:block>

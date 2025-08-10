@@ -1,0 +1,327 @@
+<section id="add" style="display: none" class="!rounded-2xl !p-[1em]">
+  <div
+    class="relative z-[2] mb-[1em] rounded-2xl border border-zinc-100 p-6 text-zinc-900 transition-opacity dark:border-zinc-700/40 dark:text-zinc-100"
+  >
+    <div th:if="${pluginFinder.available('link-submit')}">
+      <div class="wpcf7 js" dir="ltr">
+        <div class="screen-reader-response">
+          <p role="status" aria-live="polite" aria-atomic="true"></p>
+          <ul></ul>
+        </div>
+        <form class="init" onsubmit="return false">
+          <div class="friend-form text-sm">
+            <h6 class="mb-[1em] flex items-center text-sm font-semibold">
+              <span>类型<em class="ml-1 text-xs text-red-500">必填</em></span>
+            </h6>
+            <ul class="id flex flex-col gap-2">
+              <li>
+                <p>
+                  <span data-name="friend-type">
+                    <span class="flex gap-x-6">
+                      <span class="wpcf7-list-item first inline-flex items-center gap-2">
+                        <input
+                          id="radio-add"
+                          type="radio"
+                          class="radio"
+                          name="friend-type"
+                          value="add"
+                          checked="checked"
+                        />
+                        <label for="radio-add" class="wpcf7-list-item-label">新增</label>
+                      </span>
+                      <span class="wpcf7-list-item last inline-flex items-center gap-2">
+                        <input type="radio" id="radio-update" name="friend-type" value="update" />
+                        <label for="radio-update" class="wpcf7-list-item-label">修改</label>
+                      </span>
+                    </span>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span data-name="friend-menu">
+                    <span id="groupName" class="flex gap-x-6"> </span>
+                    <em class="text-xs text-zinc-400">提示：会根据文章内容调整分类。</em>
+                  </span>
+                </p>
+              </li>
+            </ul>
+            <ul class="friend-old-info mt-1" style="display: none">
+              <li>
+                <span class="flex" data-name="friend-update-description">
+                  <textarea
+                    class="min-w-0 max-w-full flex-auto appearance-none rounded-lg border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] placeholder:text-zinc-400 focus:border-lime-500 focus:outline-none focus:ring-4 focus:ring-lime-500/10 sm:text-sm dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-lime-400/50 dark:focus:ring-lime-400/5"
+                    cols="40"
+                    rows="3"
+                    maxlength="2000"
+                    required
+                    aria-invalid="false"
+                    placeholder="修改前站点的信息"
+                    name="friend-update-description"
+                  ></textarea>
+                </span>
+                <p class="text-xs text-zinc-400">提示：填写之前部分信息</p>
+              </li>
+            </ul>
+            <h6 class="my-[1em] flex items-center text-sm font-semibold">
+              <span>主要资料<em class="ml-1 text-xs text-red-500">必填</em></span>
+            </h6>
+            <ul class="info space-y-2">
+              <li>
+                <p>
+                  <span class="flex" data-name="friend-name">
+                    <input
+                      class="min-w-0 max-w-full flex-auto appearance-none rounded-lg border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] placeholder:text-zinc-400 focus:border-lime-500 focus:outline-none focus:ring-4 focus:ring-lime-500/10 sm:text-sm dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-lime-400/50 dark:focus:ring-lime-400/5"
+                      size="40"
+                      maxlength="400"
+                      required
+                      aria-invalid="false"
+                      placeholder="名称"
+                      value=""
+                      type="text"
+                      name="friend-name"
+                    />
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span class="flex" data-name="friend-description">
+                    <input
+                      class="min-w-0 max-w-full flex-auto appearance-none rounded-lg border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] placeholder:text-zinc-400 focus:border-lime-500 focus:outline-none focus:ring-4 focus:ring-lime-500/10 sm:text-sm dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-lime-400/50 dark:focus:ring-lime-400/5"
+                      size="40"
+                      maxlength="400"
+                      required
+                      aria-invalid="false"
+                      placeholder="简述"
+                      value=""
+                      type="text"
+                      name="friend-description"
+                    />
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span class="flex" data-name="friend-url">
+                    <input
+                      class="min-w-0 max-w-full flex-auto appearance-none rounded-lg border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] placeholder:text-zinc-400 focus:border-lime-500 focus:outline-none focus:ring-4 focus:ring-lime-500/10 sm:text-sm dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-lime-400/50 dark:focus:ring-lime-400/5"
+                      size="40"
+                      maxlength="400"
+                      required
+                      aria-invalid="false"
+                      placeholder="站点链接"
+                      value=""
+                      type="url"
+                      name="friend-url"
+                    />
+                  </span>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <span class="flex" data-name="friend-logo">
+                    <input
+                      class="min-w-0 max-w-full flex-auto appearance-none rounded-lg border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] placeholder:text-zinc-400 focus:border-lime-500 focus:outline-none focus:ring-4 focus:ring-lime-500/10 sm:text-sm dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-lime-400/50 dark:focus:ring-lime-400/5"
+                      size="40"
+                      maxlength="400"
+                      required
+                      aria-invalid="false"
+                      placeholder="logo"
+                      value=""
+                      type="url"
+                      name="friend-logo"
+                    />
+                  </span>
+                </p>
+              </li>
+            </ul>
+            <h6 class="my-[1em] flex items-center text-sm font-semibold">
+              <span>附加资料<em class="ml-1 text-xs text-red-500">选填</em></span>
+            </h6>
+            <ul class="info">
+              <li>
+                <span class="flex" data-name="friend-email">
+                  <input
+                    class="min-w-0 max-w-full flex-auto appearance-none rounded-lg border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] placeholder:text-zinc-400 focus:border-lime-500 focus:outline-none focus:ring-4 focus:ring-lime-500/10 sm:text-sm dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-lime-400/50 dark:focus:ring-lime-400/5"
+                    size="40"
+                    maxlength="400"
+                    aria-required="true"
+                    aria-invalid="false"
+                    placeholder="邮箱"
+                    value=""
+                    type="email"
+                    name="friend-email"
+                  />
+                </span>
+                <p class="my-[1em]">
+                  <em class="text-xs text-zinc-400">提示：您填写的邮箱用来邮件通知。</em>
+                </p>
+              </li>
+            </ul>
+          </div>
+          <p>
+            <input class="button has-thyuu-color" type="submit" value="提交链接" onclick="linkSubmit()" />
+          </p>
+        </form>
+
+        <script>
+          this.getLinkGroups();
+
+          // 添加类型切换事件监听
+          document.querySelectorAll('input[name="friend-type"]').forEach((radio) => {
+            radio.addEventListener("change", function () {
+              const oldInfo = document.querySelector(".friend-old-info");
+              if (this.value === "update") {
+                oldInfo.style.display = "block";
+              } else {
+                oldInfo.style.display = "none";
+              }
+            });
+          });
+
+          function linkSubmit() {
+            var groupName = getGroupName();
+
+            var type = getType();
+
+            var updateDescription = this.getFieldValue("friend-update-description");
+            var displayName = this.getFieldValue("friend-name");
+            var description = this.getFieldValue("friend-description");
+            var url = this.getFieldValue("friend-url");
+            var logo = this.getFieldValue("friend-logo");
+            var email = this.getFieldValue("friend-email");
+
+            if (
+              displayName != null &&
+              displayName != "" &&
+              description != null &&
+              description != "" &&
+              url != null &&
+              url != "" &&
+              logo != null &&
+              logo != ""
+            ) {
+              fetch("/apis/anonymous.link.submit.kunkunyu.com/v1alpha1/linksubmits/-/submit", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  type: type,
+                  displayName: displayName,
+                  url: url,
+                  logo: logo,
+                  email: email,
+                  description: description,
+                  updateDescription: updateDescription,
+                  groupName: groupName,
+                }),
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  const { Message } = main.useMessage();
+                  if (data.detail != null && data.detail != "") {
+                    Message.error(data.detail, 3000);
+                    return;
+                  } else {
+                    this.clearForm();
+                    if (data.spec.status === "review") {
+                      Message.success("提交成功，链接已审核", 2000);
+                    } else {
+                      Message.success("提交成功，请等待审核", 2000);
+                    }
+                  }
+                })
+                .catch((error) => {
+                  // 处理错误情况
+                  Message.error(error instanceof Error ? error.message : "提交失败，请稍后重试", 3000);
+                });
+            }
+          }
+
+          function getFieldValue(field) {
+            var inputFields = document.getElementsByName(field);
+            // 通常 getElementsByName 返回的是一个 NodeList，我们只需要第一个元素
+            var inputField = inputFields[0];
+            // 返回输入字段的值
+            return inputField ? inputField.value : null;
+          }
+
+          function clearFieldValue(field) {
+            document.getElementsByName(field)[0].value = null;
+          }
+
+          function clearForm() {
+            // 表单重置
+            this.clearFieldValue("friend-update-description");
+            this.clearFieldValue("friend-name");
+            this.clearFieldValue("friend-description");
+            this.clearFieldValue("friend-url");
+            this.clearFieldValue("friend-logo");
+            this.clearFieldValue("friend-email");
+          }
+
+          function getGroupName() {
+            // 获取所有名为 'friend-menu' 的单选按钮
+            var radios = document.getElementsByName("friend-menu");
+            // 遍历单选按钮
+            for (var i = 0, length = radios.length; i < length; i++) {
+              if (radios[i].checked) {
+                // 返回选中的单选按钮的值
+                return radios[i].value;
+              }
+            }
+            // 如果没有单选按钮被选中，则返回 null 或者你想要的默认值
+            return null;
+          }
+
+          function getType() {
+            // 获取所有名为 'friend-type' 的单选按钮
+            var radios = document.getElementsByName("friend-type");
+            // 遍历单选按钮
+            for (var i = 0, length = radios.length; i < length; i++) {
+              if (radios[i].checked) {
+                // 返回选中的单选按钮的值
+                return radios[i].value;
+              }
+            }
+            // 如果没有单选按钮被选中，则返回 null 或者你想要的默认值
+            return null;
+          }
+
+          function getLinkGroups() {
+            fetch("/apis/anonymous.link.submit.kunkunyu.com/v1alpha1/linkgroups", {
+              method: "GET",
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                let optionList = data;
+                let option = ``;
+                if (optionList.length > 0) {
+                  let index = 0;
+                  optionList.forEach(function (item) {
+                    index += 1;
+                    option += `<span class="wpcf7-list-item inline-flex items-center gap-2  first">
+                                                <input type="radio" id="menu-${index}" name="friend-menu" value="${
+                      item.groupName
+                    }"
+                                                    ${index == 1 ? 'checked="checked"' : ""}>
+                                                <label for="menu-${index}" class="wpcf7-list-item-label">${
+                      item.displayName
+                    }</label>
+                                            </span>`;
+                  });
+                }
+                document.getElementById("groupName").innerHTML = option;
+              })
+              .catch((error) => {
+                // 处理错误情况
+                console.log(error.msg);
+              });
+          }
+        </script>
+      </div>
+    </div>
+  </div>
+</section>

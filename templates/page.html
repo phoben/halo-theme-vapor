@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html( content = ~{::content},page_js = ~{::page_js},_title = |${singlePage.spec.title}|)}"
+>
+  <th:block th:fragment="content">
+    <div class="relative z-[2] mt-32 sm:px-8 lg:mt-48">
+      <div class="mx-auto max-w-7xl lg:px-8">
+        <div class="relative px-4 md:px-8">
+          <div class="w-full md:flex md:justify-between xl:relative">
+            <main class="max-w-[51rem] before:mr-1 md:flex-1 md:shrink-0 md:pr-[2em]">
+              <header
+                class="fade-before relative flex flex-col items-center pb-5 after:absolute after:-bottom-1 after:block after:h-px after:w-full after:rounded after:bg-gradient-to-r after:from-zinc-400/20 after:via-zinc-200/10 after:to-transparent dark:after:from-zinc-600/20 dark:after:via-zinc-700/10"
+              >
+                <div class="relative mb-7 aspect-[240/135] w-full md:mb-12">
+                  <div
+                    class="absolute z-0 hidden aspect-[240/135] w-full blur-xl saturate-150 after:absolute after:inset-0 after:hidden after:bg-white/50 md:block md:after:block dark:after:bg-black/50"
+                  >
+                    <img
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                      data-nimg="fill"
+                      class="select-none"
+                      th:src="${singlePage.spec.cover}"
+                      th:srcset="|${thumbnail.gen(singlePage.spec.cover, 's')} 400w,
+                                ${thumbnail.gen(singlePage.spec.cover, 'm')} 800w,
+                                ${thumbnail.gen(singlePage.spec.cover, 'l')} 1200w,
+                                ${thumbnail.gen(singlePage.spec.cover, 'xl')} 1600w|"
+                      sizes="(max-width: 1600px) 100vw, 1600px"
+                      style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent"
+                    />
+                  </div>
+                  <img
+                    th:alt="${singlePage.spec.title}"
+                    loading="lazy"
+                    decoding="async"
+                    data-nimg="fill"
+                    class="select-none rounded-2xl object-cover ring-1 ring-zinc-900/5 transition md:rounded-3xl dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20"
+                    th:src="${singlePage.spec.cover}"
+                    th:srcset="|${thumbnail.gen(singlePage.spec.cover, 's')} 400w,
+                              ${thumbnail.gen(singlePage.spec.cover, 'm')} 800w,
+                              ${thumbnail.gen(singlePage.spec.cover, 'l')} 1200w,
+                              ${thumbnail.gen(singlePage.spec.cover, 'xl')} 1600w|"
+                    sizes="(max-width: 1600px) 100vw, 1600px"
+                    style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent"
+                  />
+                </div>
+                <h1 class="mt-4 w-full text-4xl font-bold text-zinc-800 sm:text-5xl dark:text-zinc-100">
+                  <span
+                    class="font-slogan"
+                    style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance"
+                    th:text="${singlePage.spec.title}"
+                  ></span>
+                  <span
+                    class="before:inline-block before:h-2 before:w-2 before:rounded-full before:bg-[#0887e7] before:align-[.2em] before:content-['']"
+                    style="color: #0887e7"
+                  ></span>
+                  <span
+                    class="inline-flex items-center space-x-1.5 text-sm font-normal text-zinc-700/50 dark:text-zinc-300/50"
+                    th:title="${singlePage.stats.upvote}"
+                  >
+                    <i class="iconfont icon-views1 text-sm"></i>
+                    <div><span class="format-num" th:data-num="${singlePage.stats.visit}"></span>&nbsp;次点击</div>
+                  </span>
+                </h1>
+                <p class="my-5 w-full text-sm font-medium text-zinc-500" th:text="${singlePage.spec.excerpt.raw}"></p>
+              </header>
+              <article
+                th:utext="${singlePage.content.content}"
+                class="prose relative mt-8 grid-cols-7 dark:prose-invert"
+                id="content"
+              ></article>
+
+              <th:block th:replace="~{modules/widgets/comment :: page(${singlePage},'SinglePage')}"></th:block>
+            </main>
+            <th:block
+              th:with="featured_focus_num=${#conversions.convert(theme.config.layout.featured_focus_num, 'java.lang.Integer')}"
+            >
+              <th:block th:if="${featured_focus_num > 0}" th:with="posts = ${postFinder.list(1,featured_focus_num)}">
+                <aside
+                  th:if="${posts.total gt 0}"
+                  class="page-aside space-y-10 before:mr-1 md:w-[360px] lg:sticky lg:top-8 lg:h-fit"
+                >
+                  <div class="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+                    <h2 class="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                      <i class="iconfont icon-send"></i>
+                      <span class="ml-2">推荐阅读</span>
+                    </h2>
+                    <ol class="mt-6 space-y-4">
+                      <th:block th:with="postItems=${posts.items}">
+                        <th:block th:each="post : ${postItems}">
+                          <li class="fade-before flex gap-4">
+                            <div
+                              class="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0"
+                            >
+                              <img
+                                th:alt="${post.spec.title}"
+                                loading="lazy"
+                                width="100"
+                                height="100"
+                                decoding="async"
+                                data-nimg="1"
+                                class="h-8 w-8 rounded-full"
+                                th:src="${post.spec.cover}"
+                                style="color: transparent"
+                              />
+                            </div>
+                            <dl class="flex flex-auto flex-wrap gap-x-2">
+                              <dt class="sr-only">标题</dt>
+                              <dd class="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                                <a
+                                  class="line-clamp-1 hover:underline"
+                                  th:href="@{${post.status.permalink}}"
+                                  th:title="${post.spec.title}"
+                                  >[[${post.spec.title}]]</a
+                                >
+                              </dd>
+
+                              <dt class="sr-only">描述</dt>
+                              <dd
+                                th:if="${not #strings.isEmpty(post.spec.excerpt.raw)}"
+                                class="line-clamp-1 text-xs text-zinc-500 dark:text-zinc-400"
+                              >
+                                [[${post.spec.excerpt.raw}]]
+                              </dd>
+                              <dd th:else class="line-clamp-1 text-xs text-zinc-500 dark:text-zinc-400">暂无内容</dd>
+                              <dt class="sr-only">日期</dt>
+                              <dd
+                                class="ml-auto text-xs text-zinc-500/80 dark:text-zinc-400/80"
+                                th:text="${#dates.format(post.spec.publishTime,'yyyy/MM/dd')}"
+                              ></dd>
+                            </dl>
+                          </li>
+                        </th:block>
+                      </th:block>
+                    </ol>
+                  </div>
+                </aside>
+              </th:block>
+            </th:block>
+          </div>
+        </div>
+      </div>
+    </div>
+  </th:block>
+</html>
+<th:block th:fragment="page_js">
+  <th:block th:replace="~{modules/widgets/fancy}"></th:block>
+  <script th:src="@{/assets/js/marked.umd.js?v={version}(version='1.2.2')}"></script>
+</th:block>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    main.prettifyContainer(".format-num");
+    main.replaceLinksInElement(document.getElementById("content"));
+  });
+</script>
