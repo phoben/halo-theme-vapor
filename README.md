@@ -16,6 +16,9 @@ Vapor是一个简约风格的博客主题
 | :------: | :--------------------------- |
 | 三禾木木 | https://halo.scott-studio.cn |
 
+## 📖 主题使用文档
+- [木木笔记](http://localhost:3000/docs/vapor/guide/)
+
 ## 🔌 插件依赖
 
 - THYUU 区块 [plugin-thyuu-embed](https://www.halo.run/store/apps/app-lKYuv)
