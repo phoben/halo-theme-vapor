@@ -275,10 +275,17 @@ VAPORCopyButton("pre code", "复制代码");
 VAPORCopyButton("#copy em", null);
 animateDelayed(".page-aside", "li", 0, 0.1);
 
+function postMarkHighlight(){
+  document.querySelectorAll('mark[data-color]').forEach(el => {
+    el.style.setProperty('--custom-color', el.dataset.color);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   VAPORThemesSwitcher();
   VAPORLazysLoad("img", "loaded");
   postCodeHighlight();
+  postMarkHighlight()
   postGalleryCarousel(".wp-block-gallery", ".wp-block-image");
   FadeAnimate();
   VAPORHeadFixed();

@@ -1247,9 +1247,8 @@ details {
 
 // mark
 mark {
-  --color: hsl(84.8deg 85.23% 34.51%);
   background: transparent;
-  color: var(--color) !important;
+  color: var(--custom-color,hsl(82.71deg 77.97% 55.49%)) !important;
   margin: 0 3px;
   font-style: 0.875rem;
   font-weight: 600;
@@ -1257,9 +1256,6 @@ mark {
   text-decoration: underline wavy;
   text-decoration-thickness: from-font;
   text-underline-offset: 3px;
-}
-.dark mark {
-  color: hsl(82.71deg 77.97% 55.49%) !important;
 }
 .font-slogan {
   font-family: "快看世界体";
