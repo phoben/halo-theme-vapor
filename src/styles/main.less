@@ -37,7 +37,6 @@
   --vapor--size-card-small: 13.5rem;
   --vapor--size-screen-medium: 1152px;
   --vapor--size-scroll: 12px;
-  --vapor--size-cover-top: max(10em, 30vh);
 
   /* 区块 */
   --vapor--height-head: 4rem;
@@ -1089,98 +1088,6 @@ figure.f-carousel.wp-block-gallery:not(.alignfull) .f-carousel__nav .f-button {
   margin: 0 !important;
 }
 
-.wp-block-gallery {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em !important;
-  align-items: center !important;
-  justify-content: var(--caption-align, space-between);
-}
-
-#article .wp-block-gallery:not(.loaded) {
-  max-height: min(var(--image-max-size, 55vh) + 3em, 100vh);
-}
-
-#article .wp-block-gallery > *:not(vapor-loaed) {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s, pointer-events 0s;
-}
-
-#article .wp-block-gallery.loaded > *:not(vapor-loaed) {
-  pointer-events: auto;
-  opacity: 1;
-}
-
-.wp-block-gallery vapor-loaed {
-  --trfm: none;
-  --loaed-play: running;
-  width: 100%;
-  height: 100%;
-}
-
-.wp-block-gallery.has-nested-images figure.wp-block-image:has(figcaption):before {
-  pointer-events: none;
-  border-radius: var(--vapor--size-radius);
-}
-
-figure.f-carousel.wp-block-gallery {
-  --caption-size: auto;
-  --wp--style--unstable-gallery-gap: 1rem;
-}
-
-figure.f-carousel.wp-block-gallery:is(.alignfull, .alignwide) {
-  --image-max-size: 80vh;
-  --caption-align: center;
-}
-
-figure.f-carousel.wp-block-gallery.alignfull {
-  --image-max-size: 100vh;
-  --caption-size: unset;
-  --f-button-width: 3.5em;
-  --f-button-height: 3.5em;
-  --f-button-bg: hsl(var(--thyuu--color-font) / 10%);
-  --f-button-color: #fff;
-  --f-button-next-pos: var(--thyuu--size-edgelr);
-  --f-button-prev-pos: var(--thyuu--size-edgelr);
-}
-
-figure.f-carousel.wp-block-gallery figcaption {
-  margin: 0;
-  flex: var(--caption-size);
-  text-align: left;
-}
-
-figure.f-carousel.wp-block-gallery .wp-block-image {
-  margin: 0 var(--wp--style--unstable-gallery-gap) 0 0 !important;
-}
-
-figure.f-carousel.wp-block-gallery:not(.is-cropped) .wp-block-image {
-  width: auto !important;
-}
-
-figure.f-carousel.wp-block-gallery .wp-block-image img {
-  height: 100%;
-  min-height: var(--thyuu--size-card-normal);
-  max-height: var(--image-max-size, 55vh);
-}
-
-figure.f-carousel.wp-block-gallery .f-carousel__nav {
-  order: 3;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-figure.f-carousel.wp-block-gallery .f-carousel__dots,
-figure.f-carousel.wp-block-gallery:not(.alignfull) .f-carousel__nav .f-button {
-  position: static;
-  transform: none;
-  margin: 0 !important;
-}
-
 // comment loading
 .loading-block {
   display: flex;
@@ -1462,60 +1369,6 @@ mark {
     margin: 0 !important;
     background: transparent !important;
   }
-}
-
-/* =Table
------------------------------------------------ */
-.wp-block-table {
-  max-height: max(var(--vapor--size-card-normal), 80vh - var(--vapor--size-edgetb));
-  font-size: max(var(--vapor--size-medium), 0.75em);
-  border: var(--vapor--border) !important;
-  border-radius: var(--vapor--size-radius);
-  background: var(--vapor--color-back-white) !important;
-  white-space: pre;
-  overflow: auto;
-}
-
-.wp-block-table :is(td, th) {
-  padding-inline: 1em;
-  border: var(--vapor--border);
-  border-width: thin thin 0 0;
-}
-
-.wp-block-table :is(td, th):last-child {
-  border-right: 0;
-}
-
-.wp-block-table :is(thead, tfoot) {
-  border: 0;
-  font-size: 1.1em;
-}
-
-.wp-block-table :is(thead th, tfoot td) {
-  position: sticky;
-  top: 0;
-  border: 0;
-  background: linear-gradient(hsl(var(--vapor--main-color) / 5%) 0 0) var(--vapor--color-back-white);
-  z-index: 2;
-}
-
-.wp-block-table.is-style-stripes tbody tr:nth-child(odd) {
-  background: var(--vapor--color-back-font);
-}
-
-.wp-block-table tr:hover {
-  background: hsl(var(--vapor--subs-color) / 0.05) !important;
-  transition: background 0.3s;
-}
-
-.wp-block-table figcaption {
-  padding: 0.5em 1em;
-  border-top: var(--vapor--border);
-  border-radius: 0;
-  background: var(--vapor--color-back-font);
-  position: sticky;
-  left: 0;
-  white-space: normal;
 }
 
 /* =footer

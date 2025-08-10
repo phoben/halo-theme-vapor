@@ -8,7 +8,7 @@ spec:
     name: SCOTT Studio
     website: https://halo.scott-studio.cn
   description: 一个极简风格的Halo主题
-  logo: "/themes/scottstudio-vapor/assets/imgs/vapor.png"
+  logo: "/themes/halo-theme-vapor/assets/imgs/vapor.png"
   homepage: https://halo.scott-studio.cn
   repo: https://github.com/iscottt/halo-theme-vapor
   issues: https://github.com/iscottt/halo-theme-vapor/issues

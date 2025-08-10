@@ -137,7 +137,7 @@ spec:
           value:
             - sf_title: 鄂ICP备xxxxxxx号
               sf_link: https://beian.miit.gov.cn/
-              sf_img: /themes/scottstudio-vapor/assets/imgs/icpb.webp
+              sf_img: /themes/halo-theme-vapor/assets/imgs/icpb.webp
           children:
             - $formkit: text
               name: sf_title
