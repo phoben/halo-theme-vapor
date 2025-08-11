@@ -548,8 +548,9 @@ module.exports = {
     "-top-[2.5em]",
     "min-h-[96px]",
     "dark:bg-zinc-200",
-    " dark:text-black",
-    " dark:hover:bg-zinc-300",
+    "dark:text-black",
+    "dark:hover:bg-zinc-300",
     "dark:active:bg-zinc-300/70",
+    'max-w-[69%]'
   ],
 };
