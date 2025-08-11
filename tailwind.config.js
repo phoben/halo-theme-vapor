@@ -255,7 +255,7 @@ module.exports = {
 
           // Tables
           table: {
-            width: "100%",
+            width: "100% !important",
             tableLayout: "auto",
             textAlign: "left",
             fontSize: theme("fontSize.sm")[0],
@@ -278,7 +278,11 @@ module.exports = {
           },
           "tbody tr": {
             borderBottomWidth: "1px",
+            height:'auto !important',
             borderBottomColor: "var(--tw-prose-td-borders)",
+          },
+          "tbody tr p": {
+            margin: 0
           },
           "tbody tr:last-child": {
             borderBottomWidth: 0,

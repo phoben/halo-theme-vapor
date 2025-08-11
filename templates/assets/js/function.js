@@ -281,11 +281,18 @@ function postMarkHighlight(){
   });
 }
 
+function postTableHighlight(){
+  document.querySelectorAll('.prose table').forEach(el => {
+    el.parentNode.setAttribute('class','wp-block-table')
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   VAPORThemesSwitcher();
   VAPORLazysLoad("img", "loaded");
   postCodeHighlight();
   postMarkHighlight()
+  postTableHighlight()
   postGalleryCarousel(".wp-block-gallery", ".wp-block-image");
   FadeAnimate();
   VAPORHeadFixed();

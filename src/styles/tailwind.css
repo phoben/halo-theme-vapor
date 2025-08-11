@@ -237,6 +237,7 @@ figure.f-carousel.wp-block-gallery:not(.alignfull) .f-carousel__nav .f-button {
 
 .wp-block-table :is(td, th) {
   padding-inline: 1em;
+  padding: .5em;
   border: var(--vapor--border);
   border-width: thin thin 0 0;
 }
@@ -245,19 +246,18 @@ figure.f-carousel.wp-block-gallery:not(.alignfull) .f-carousel__nav .f-button {
   border-right: 0;
 }
 
-.wp-block-table :is(thead, tfoot) {
+.wp-block-table tr:first-of-type {
   border: 0;
   font-size: 1.1em;
 }
 
-.wp-block-table :is(thead th, tfoot td) {
+.wp-block-table tr:first-of-type :is(th, td) {
   position: sticky;
   top: 0;
   border: 0;
   background: linear-gradient(hsl(var(--vapor--main-color) / 5%) 0 0) var(--vapor--color-back-white);
   z-index: 2;
 }
-
 .wp-block-table.is-style-stripes tbody tr:nth-child(odd) {
   background: var(--vapor--color-back-font);
 }
