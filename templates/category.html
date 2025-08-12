@@ -10,7 +10,7 @@
           <div class="relative px-4 md:px-0">
             <div class="fade-before relative z-[2] mx-auto mt-5 max-w-7xl p-4 lg:px-6">
               <div class="my-8">
-                <th:block th:replace="~{modules/cate-filter}" />
+                <th:block th:replace="~{modules/cate-filter  :: cate-filter(cate = ${category})}" />
               </div>
               <div class="mt-[1em]">
                 <p class="text-sm text-zinc-400">[[${category.postCount}]] posts</p>
