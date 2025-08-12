@@ -15,7 +15,7 @@ spec:
   settingName: "theme-vapor-setting"
   configMapName: "theme-vapor-setting-configMap"
   version: "1.0.1"
-  requires: "2.0.0"
+  requires: ">=2.0.0"
   license:
     - name: "Apache License 2.0"
       url: "https://github.com/iscottt/halo-theme-vapor/blob/main/LICENSE"
