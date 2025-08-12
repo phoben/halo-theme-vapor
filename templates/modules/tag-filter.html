@@ -1,4 +1,4 @@
-<div class="flex flex-wrap gap-2" th:with="tags = ${tagFinder.listAll()}">
+<div class="flex flex-wrap gap-2" th:with="tags = ${tagFinder.listAll()}" th:fragment="tag-filter(tag)">
   <a
     th:each="tagItem,iter : ${tags}"
     th:href="@{${tagItem.status.permalink}}"
