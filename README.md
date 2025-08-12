@@ -1,6 +1,6 @@
 <div align="center">
     <h1 align="center">Halo Theme Vapor</h1>
-    <a href="https://halo.zhheo.com/" target="_blank" rel="noopener noreferrer">
+    <a href="https://halo.scott-studio.cn" target="_blank" rel="noopener noreferrer">
         <img src="https://github.com/user-attachments/assets/3844b1fe-0967-4dc6-862a-99d0dbaac9df" alt="icon"/>
     </a>
 </div>
