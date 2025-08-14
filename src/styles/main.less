@@ -1441,10 +1441,6 @@ mark {
   color: var(--primary-color) !important;
 }
 
-.db--item:has(.db--image):hover .db--image {
-  transform: scale(1.1) translateY(-10px);
-}
-
 .db--title {
   font-size: 14px;
   margin-top: 0.25em;
@@ -1456,6 +1452,8 @@ mark {
   width: 191px !important;
   height: 268px !important;
   display: flex;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
   flex-wrap: wrap;
   justify-content: center;
   align-content: flex-end;
@@ -1528,4 +1526,7 @@ mark {
 .db--titleDate__month::before{
   content:"/";
   margin-right: 5px;
+}
+.db--dateList__card{
+  gap: 1em
 }
