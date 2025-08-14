@@ -41,7 +41,7 @@
   /* 区块 */
   --vapor--height-head: 4rem;
   --vapor--sticky-head: var(--vapor--height-head);
-  --vapor--border: thin solid hsl(var(--vapor--color-font) / 5%);
+  --vapor--border: 1px solid #3f3f4666;
   --vapor--shadow-normal: 0 0.2rem 1rem 0 hsl(0deg 0% 15% / 10%);
   --vapor--shadow-white: 0 0.2rem 1rem 0 hsl(0deg 0% 15% / 4%);
 
@@ -66,8 +66,8 @@
 
 /* 夜间模式 */
 :root[theme="dark"] {
-  --vapor--color-font:  214deg 5% 80%;
-  --vapor--color-back-have:  214deg 5% 5%;
+  --vapor--color-font: 214deg 5% 80%;
+  --vapor--color-back-have: 214deg 5% 5%;
   --vapor--color-back-white: hsl(214deg 5% 10%);
   --vapor--color-back-shift: 214deg 5% 20% / 50%;
   --vapor--color-font-fill: var(--vapor--color-back-have);
@@ -1248,7 +1248,7 @@ details {
 // mark
 mark {
   background: transparent;
-  color: var(--custom-color,hsl(82.71deg 77.97% 55.49%)) !important;
+  color: var(--custom-color, hsl(82.71deg 77.97% 55.49%)) !important;
   margin: 0 3px;
   font-style: 0.875rem;
   font-weight: 600;
@@ -1407,4 +1407,125 @@ mark {
   width: auto;
   height: 1.5em;
   border-radius: 3px;
+}
+
+/* =Douban
+----------------------------------------------- */
+.db--titleDate {
+  font-family: monospace !important;
+}
+
+.db--navItem,
+.db--titleDate__day,
+.db--titleDate__month {
+  color: hsl(var(--vapor--color-font)) !important;
+}
+.db--titleDate__day {
+  font-size: 40px !important;
+  font-weight: normal !important;
+}
+.db--genreItem {
+  background: var(--vapor--color-back-font) !important;
+  color: hsl(var(--vapor--color-font)) !important;
+  border: var(--vapor--border) !important;
+}
+.db--typeItem {
+  color: hsl(var(--vapor--color-font)) !important;
+  border: var(--vapor--border) !important;
+  font-size: 13px !important;
+  padding: 4px 16px !important;
+}
+.db--typeItem.is-active,
+.db--genreItem.is-active {
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.db--item:has(.db--image):hover .db--image {
+  transform: scale(1.1) translateY(-10px);
+}
+
+.db--title {
+  font-size: 14px;
+  margin-top: 0.25em;
+  line-height: 1.4;
+  font-size: 14px;
+  color: hsl(var(--vapor--color-font)) !important;
+}
+.db--item {
+  width: 191px !important;
+  height: 268px !important;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-end;
+  align-items: center;
+  text-align: center;
+  padding: 1em;
+  gap: 0.5em;
+  margin: 0px;
+  border-radius: var(--vapor--size-radius);
+  background: rgb(0, 0, 0);
+  overflow: hidden;
+  border: var(--vapor--border) !important;
+}
+.db--image {
+  object-fit: cover;
+  border-radius: 1rem;
+  cursor: pointer;
+  position: absolute;
+  width: 100% !important;
+  height: 100% !important;
+  inset: 0;
+  mask: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  transition: 0.3s ease-in-out;
+}
+
+.db--title {
+  order: -1;
+  z-index: 1;
+  flex: 1 1 100%;
+}
+
+.db--score,
+.db--title {
+  position: relative;
+  line-height: 1;
+  font-weight: 400;
+  color: white;
+  width: auto;
+  padding: 0.25em 0.5em;
+  margin: 0px;
+  border-radius: 1em;
+}
+
+.db--score {
+  color: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: saturate(1.8) blur(20px);
+  font-size: var(--thyuu--size-small);
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.db--navItem.current,
+.db--navItem:hover {
+  border-color: var(--primary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.db--listBydate {
+  flex-direction: column;
+}
+.db--titleDate {
+  flex-direction: row !important;
+  align-items: flex-end !important;
+  margin-bottom: 20px !important;
+  width: auto !important;
+}
+.db--titleDate__month{
+  margin-left: 5px !important;
+  margin-bottom: 5px;
+}
+.db--titleDate__month::before{
+  content:"/";
+  margin-right: 5px;
 }

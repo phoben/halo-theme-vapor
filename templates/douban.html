@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(content = ~{::content}, page_js = ~{::page_js},_title = |正在阅读：${title}|,_head = ~{::head})}"
+>
+  <head>
+    <link
+      rel="stylesheet"
+      id="wpd-css-css"
+      th:href="@{/plugins/plugin-douban/assets/static/db.min.css}"
+      type="text/css"
+      media="screen"
+    />
+  </head>
+  <th:block th:fragment="content">
+    <div class="relative z-[2] mt-32 sm:px-8 lg:mt-48">
+      <div class="mx-auto max-w-7xl lg:px-8">
+        <article class="fade-before relative px-4 md:px-8">
+          <header class="fade-before relative z-[2] max-w-2xl">
+            <h1 class="font-slogan text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+              [[${theme.config.custom.title}]]
+            </h1>
+            <p class="my-6 text-base text-zinc-600 dark:text-zinc-400">
+              <span style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance">
+                [[${theme.config.custom.description}]]
+              </span>
+            </p>
+          </header>
+          <section class="db--container">
+            <nav class="db--nav">
+              <div
+                th:each="type : ${types}"
+                class="db--navItem JiEun"
+                th:classappend="${type.key == 'movie' ? 'current' : ''}"
+                th:data-type="${type.key}"
+                th:text="${type.key}"
+              ></div>
+            </nav>
+            <div class="db--genres"></div>
+            <div class="db--type">
+              <div class="db--typeItem" data-status="mark">想看</div>
+              <div class="db--typeItem" data-status="doing">在看</div>
+              <div class="db--typeItem is-active" data-status="done">看过</div>
+            </div>
+
+            <div class="db--list db--list__card" data-type="movie"></div>
+            <div class="block-more block-more__centered">
+              <div class="lds-ripple u-hide"></div>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+    <script th:src="@{/plugins/plugin-douban/assets/static/db.min.js?v={version}(version='1.2.2')}"></script>
+  </th:block>
+</html>

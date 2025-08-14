@@ -161,6 +161,15 @@ spec:
     - group: custom
       label: 扩展设置
       formSchema:
+        - $formkit: text
+          name: title
+          label: 豆瓣页面标题
+          value: 豆瓣
+          validation: required
+        - $formkit: text
+          name: description
+          label: 豆瓣页面描述
+          value: 光影、旋律、文字、像素与舞台在此交汇，每段记录都藏着当时的心跳与感悟。
         - $formkit: textarea
           name: keywords
           label: SEO关键词
