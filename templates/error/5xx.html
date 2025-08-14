@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
   xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{modules/layout :: html(content = ~{::content},page_js = null,_title = '未找到页面')}"
+  th:replace="~{modules/layout :: html(content = ~{::content},page_js = null,_title = '未找到页面',_head = ~{::head})}"
 >
   <th:block th:fragment="content">
     <div class="mt-16 sm:mt-48 sm:px-8">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
   xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{modules/layout :: html( content = ~{::content},page_js = ~{::page_js},_title = |${singlePage.spec.title}|)}"
+  th:replace="~{modules/layout :: html( content = ~{::content},page_js = ~{::page_js},_title = |${singlePage.spec.title}|,_head = ~{::head})}"
 >
   <th:block th:fragment="content">
     <div class="relative z-[2] mt-32 sm:px-8 lg:mt-48">
@@ -121,11 +121,16 @@
                               <dt class="sr-only">描述</dt>
                               <dd
                                 th:if="${not #strings.isEmpty(post.spec.excerpt.raw)}"
-                                class="max-w-[69%] line-clamp-1 text-xs text-zinc-500 dark:text-zinc-400"
+                                class="line-clamp-1 max-w-[69%] text-xs text-zinc-500 dark:text-zinc-400"
                               >
                                 [[${post.spec.excerpt.raw}]]
                               </dd>
-                              <dd th:if="${#strings.isEmpty(post.spec.excerpt.raw)}" class="line-clamp-1 text-xs text-zinc-500 dark:text-zinc-400">暂无内容</dd>
+                              <dd
+                                th:if="${#strings.isEmpty(post.spec.excerpt.raw)}"
+                                class="line-clamp-1 text-xs text-zinc-500 dark:text-zinc-400"
+                              >
+                                暂无内容
+                              </dd>
                               <dt class="sr-only">日期</dt>
                               <dd
                                 class="ml-auto text-xs text-zinc-500/80 dark:text-zinc-400/80"
