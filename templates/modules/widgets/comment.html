@@ -1,4 +1,4 @@
-<th:block th:fragment="page(post,kind)">
+<th:block th:fragment="page(post,kind)" th:if="${post.spec.allowComment}">
   <script
     type="text/javascript"
     th:src="@{/assets/plugins/comment-widget/commentWidget.min.js?ver={version}(version=${theme.spec.version})}"
