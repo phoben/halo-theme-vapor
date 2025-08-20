@@ -1,0 +1,32 @@
+<th:block th:fragment="gallery(size,medium)">
+  <th:block th:if="${size == 1}">
+    <div class="w-full" th:each="media,iterStat : ${medium}">
+      <th:block th:replace="~{modules/widgets/media :: media(media = ${media},iterStat = ${iterStat}, size=${size})}">
+      </th:block>
+    </div>
+  </th:block>
+  <th:block th:if="${size == 2}">
+    <div class="grid w-full grid-cols-2">
+      <div class="aspect-1 relative" th:each="media,iterStat : ${medium}">
+        <th:block th:replace="~{modules/widgets/media :: media(media = ${media},iterStat = ${iterStat}, size=${size})}">
+        </th:block>
+      </div>
+    </div>
+  </th:block>
+  <th:block th:if="${size == 3}">
+    <div class="media-large-wrapper grid w-full gap-1">
+      <th:block th:each="media,iterStat : ${medium}">
+        <th:block th:replace="~{modules/widgets/media :: media(media = ${media},iterStat=${iterStat}, size=${size})}">
+        </th:block>
+      </th:block>
+    </div>
+  </th:block>
+  <th:block th:if="${size >= 4}">
+    <div class="grid w-full grid-cols-3 gap-1">
+      <th:block th:each="media,iterStat : ${medium}">
+        <th:block th:replace="~{modules/widgets/media :: media(media = ${media},iterStat=${iterStat}, size=${size})}">
+        </th:block>
+      </th:block>
+    </div>
+  </th:block>
+</th:block>
