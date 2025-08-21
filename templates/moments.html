@@ -38,7 +38,20 @@
                 </a>
               </nav>
             </div>
-            <ul class="moments-list">
+            <th:block th:if="${moments.total == 0}">
+              <div class="fade-before relative z-[2] mx-auto my-16 max-w-md">
+                <div class="relative rounded-2xl border border-zinc-100 p-6 transition-opacity dark:border-zinc-700/40">
+                  <h2 class="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                    <i class="iconfont icon-tishi"></i>
+                    <span class="ml-2">暂时没有发布瞬间</span>
+                  </h2>
+                  <p class="mt-2 text-xs text-zinc-600 md:text-sm dark:text-zinc-400">
+                    换个地方再继续搜索吧，获取你会在其他地方找到答案。
+                  </p>
+                </div>
+              </div>
+            </th:block>
+            <ul th:else class="moments-list">
               <th:block
                 th:each="moment : ${moments.items}"
                 th:attr="x-data=|{name:'${moment.metadata.name}',showComment:false}|"
