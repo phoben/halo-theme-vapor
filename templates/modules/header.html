@@ -115,7 +115,7 @@
               >
                 <a
                   th:each="childMenuItem : ${menuItem.children}"
-                  class="no-move flex items-center gap-x-3.5 px-3 py-2 text-sm transition duration-300 hover:text-lime-600 dark:hover:text-lime-400"
+                  class="header-menu-link no-move flex items-center gap-x-3.5 px-3 py-2 text-sm transition duration-300 hover:text-lime-600 dark:hover:text-lime-400"
                   th:href="@{${childMenuItem.status.href}}"
                   th:text="${childMenuItem.status.displayName}"
                   th:target="${childMenuItem.spec.target?.value}"
