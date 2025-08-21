@@ -162,23 +162,18 @@ spec:
       label: 扩展设置
       formSchema:
         - $formkit: text
-          name: title
-          label: 豆瓣页面标题
-          value: 豆瓣
-          validation: required
-        - $formkit: text
-          name: description
+          name: douban_description
           label: 豆瓣页面描述
           value: 光影、旋律、文字、像素与舞台在此交汇，每段记录都藏着当时的心跳与感悟。
-        - $formkit: text
-          name: moments_title
-          label: 瞬间页面标题
-          value: 瞬间
-          validation: required
         - $formkit: text
           name: moments_description
           label: 瞬间页面描述
           value: 生活碎片在此停泊，一句碎念、半帧风景、偶然心绪都被妥帖收藏，拼凑成时光的鲜活注脚。
+        - $formkit: text
+          name: equipment_description
+          label: 装备页面描述
+          value: 实物装备推荐，一起享受科技带来的乐趣
+          validation: required
         - $formkit: textarea
           name: keywords
           label: SEO关键词
