@@ -9,11 +9,7 @@
         <div class="mx-auto max-w-7xl lg:px-8">
           <div class="relative px-4 md:px-0">
             <div class="fade-before relative z-[2] mx-auto mt-5 max-w-7xl py-4 lg:py-6">
-              <div class="my-8">
-                <th:block th:replace="~{modules/tag-filter :: tag-filter(tag = ${tag})}" />
-              </div>
-              <div class="mt-[1em]">
-                <p class="text-sm text-zinc-400">[[${tag.postCount}]] posts</p>
+              <div class="mt-8">
                 <h2 class="mt-2 text-4xl font-semibold">
                   [[${tag.spec.displayName}]]
                   <span
@@ -21,6 +17,9 @@
                     style="color: #0887e7"
                   ></span>
                 </h2>
+              </div>
+              <div class="my-4">
+                <th:block th:replace="~{modules/tag-filter :: tag-filter(tag = ${tag})}" />
               </div>
 
               <ul class="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
