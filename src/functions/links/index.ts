@@ -19,10 +19,10 @@ export function replaceLinksInElement(container: HTMLElement | null) {
   if (!links || links.length === 0) {
     return;
   }
-
   links.forEach((link) => {
     try {
       const href = link.href;
+      const target = link.getAttribute("target") || "";
       const text = link.textContent?.trim() || "";
       const className = link.getAttribute("class") || "";
       if (className.includes("dont-replace")) return;
@@ -38,7 +38,7 @@ export function replaceLinksInElement(container: HTMLElement | null) {
       const newLinkHTML = `
 <a class="inline-flex place-items-baseline items-baseline gap-0.5 px-0.5 text-[0.95em] leading-none font-semibold  hover:underline "
    rel="noopener noreferrer" 
-   target="_blank" 
+   target="${target}" 
    href="${escapeHtml(href)}">
   <span class="inline-flex translate-y-0.5">
     <img alt="" aria-hidden="true" loading="lazy" width="16" height="16"
