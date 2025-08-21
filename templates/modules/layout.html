@@ -9,7 +9,12 @@
 >
   <head th:replace="~{modules/head :: head}"></head>
 
-  <body>
+  <body
+    th:classappend="${#authentication.name  != 'anonymousUser' ? ' logged-in' : ''}"
+    th:with="contributor = ${contributorFinder.getContributor(#authentication.name)},
+      roleNames = ${#annotations.get(contributor, 'rbac.authorization.halo.run/role-names')},
+      roleName= ${roleNames == '[]' ? 'super-' : #strings.substring(roleNames,2, #strings.length(roleNames) - 2) }"
+  >
     <th:block th:replace="~{modules/header}" />
     <main class="min-h-screen" id="site-main">
       <th:block th:replace="${content}" />
