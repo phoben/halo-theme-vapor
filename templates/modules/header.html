@@ -201,9 +201,6 @@
       const menuLinks = document.querySelectorAll(".header-menu-link");
 
       menuLinks.forEach((link) => {
-        // 移除现有active类
-        link.classList.remove("text-lime-600", "dark:text-lime-400", "active");
-
         const href = link.getAttribute("href");
         const submenu = link.nextElementSibling;
 
@@ -216,7 +213,7 @@
         // 检查子菜单中是否有活动项
         if (submenu && submenu.classList.contains("submenu")) {
           const hasActiveChild = submenu.querySelectorAll(".active");
-          if (hasActiveChild) {
+          if (hasActiveChild.length) {
             link.classList.add("text-lime-600", "dark:text-lime-400", "active");
           }
         }
