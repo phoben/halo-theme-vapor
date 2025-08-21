@@ -1606,9 +1606,11 @@ mark {
     transition: 0.5s cubic-bezier(0.6, 0.1, 0, 1);
     transform-origin: left top;
     transform: translateX(-50%) translateY(-1em);
+    pointer-events: none;
   }
   &:hover {
     .submenu {
+      pointer-events: auto;
       opacity: 1;
       transform: translateX(-50%);
     }
