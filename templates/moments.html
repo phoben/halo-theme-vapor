@@ -60,9 +60,9 @@
                 <li
                   class="moments-item fade-before list-none rounded-2xl border border-zinc-200 bg-gradient-to-b from-zinc-50/50 to-white/70 dark:border-zinc-700/40 dark:from-zinc-900/70 dark:to-zinc-800/60"
                 >
-                  <span class="flex w-full flex-col items-start gap-2 !p-4">
+                  <span class="flex w-full flex-col items-start gap-1 !p-4">
                     <div class="flex w-full items-center justify-between gap-2">
-                      <div class="inline-flex items-center text-zinc-600 dark:text-zinc-400">
+                      <div class="inline-flex items-center text-sm text-zinc-600 dark:text-zinc-400">
                         <svg
                           width="1em"
                           height="1em"
@@ -90,7 +90,7 @@
                     <div class="w-full">
                       <div
                         th:utext="${content.html}"
-                        class="prose break-words dark:prose-invert prose-p:m-0 prose-pre:p-0"
+                        class="prose break-words text-[14px] dark:prose-invert prose-p:m-0 prose-pre:p-0"
                       ></div>
                       <div
                         th:unless="${#lists.isEmpty(moment.spec.content.medium)}"
