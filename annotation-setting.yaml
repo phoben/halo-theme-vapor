@@ -1,0 +1,31 @@
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  generateName: annotation-setting-
+spec:
+  targetRef:
+    group: core.halo.run
+    kind: LinkGroup
+  formSchema:
+    - $formkit: checkbox
+      name: "hide"
+      label: "隐藏"
+      value: "false"
+      on-value: "true"
+      off-value: "false"
+---
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  generateName: annotation-setting-
+spec:
+  targetRef:
+    group: core.halo.run
+    kind: Link
+  formSchema:
+    - $formkit: checkbox
+      name: "hide"
+      label: "隐藏"
+      value: "false"
+      on-value: "true"
+      off-value: "false"
