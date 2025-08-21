@@ -195,12 +195,34 @@
         targets[idx].style = styleStr;
       });
     }
-    initImgColor();
-    document.querySelectorAll(".header-menu-link").forEach(function (link) {
-      if (link.getAttribute("href") === window.location.pathname) {
-        link.classList.add("text-lime-600", "dark:text-lime-400", "active");
-      }
-    });
+    // 优化后的代码
+    function updateActiveMenu() {
+      const currentPath = window.location.pathname;
+      const menuLinks = document.querySelectorAll(".header-menu-link");
+
+      menuLinks.forEach((link) => {
+        // 移除现有active类
+        link.classList.remove("text-lime-600", "dark:text-lime-400", "active");
+
+        const href = link.getAttribute("href");
+        const submenu = link.nextElementSibling;
+
+        // 检查当前链接是否匹配
+        if (href === currentPath) {
+          link.classList.add("text-lime-600", "dark:text-lime-400", "active");
+          return; // 如果匹配，无需继续检查子菜单
+        }
+
+        // 检查子菜单中是否有活动项
+        if (submenu && submenu.classList.contains("submenu")) {
+          const hasActiveChild = submenu.querySelectorAll(".active");
+          if (hasActiveChild) {
+            link.classList.add("text-lime-600", "dark:text-lime-400", "active");
+          }
+        }
+      });
+    }
+
     function navMousemove(e) {
       if (e.target.classList.contains("no-move")) return;
       const target = document.querySelector(".menu-nav");
@@ -214,5 +236,7 @@
     }
     const el = document.querySelector(".menu-nav");
     el.addEventListener("mousemove", navMousemove);
+    initImgColor();
+    updateActiveMenu();
   });
 </script>
