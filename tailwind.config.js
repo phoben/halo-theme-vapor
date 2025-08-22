@@ -555,5 +555,6 @@ module.exports = {
     "bg-blue-400/20",
     "dark:bg-blue-400/20",
     "text-[14px]",
+    "bottom-2",
   ],
 };
