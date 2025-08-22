@@ -2,7 +2,7 @@
   <img
     th:if="${#strings.equals(media.type,'PHOTO')}"
     data-fancybox="images"
-    class="h-[100px] w-full transform-gpu break-inside-avoid rounded-md object-cover"
+    class="load h-[100px] w-full transform-gpu break-inside-avoid rounded-md object-cover"
     th:classappend="${size==1}?'!h-full':(${iterStat.first && size == 3}?'media-large':'')"
     th:src="${media.url}"
     th:srcset="|${thumbnail.gen(media.url, 's')} 400w,
