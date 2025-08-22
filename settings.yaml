@@ -174,6 +174,11 @@ spec:
           label: 装备页面描述
           value: 实物装备推荐，一起享受科技带来的乐趣
           validation: required
+        - $formkit: text
+          name: photos_description
+          label: 图库页面描述
+          value: 帧帧光影凝住时光絮语，每幅画面都是笔尖未及的温柔心事与灵感回响。
+          validation: required
         - $formkit: textarea
           name: keywords
           label: SEO关键词

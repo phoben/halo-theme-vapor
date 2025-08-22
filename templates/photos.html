@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html (content = ~{::content},page_js = ~{::page_js},_title = ${title},_head = ~{::head})}"
+>
+  <th:block th:fragment="content">
+    <div class="relative z-[2] mt-32 sm:px-8 lg:mt-48">
+      <div class="mx-auto max-w-7xl lg:px-8">
+        <div class="relative px-4 md:px-8">
+          <header class="fade-before relative z-[2] max-w-2xl">
+            <h1 class="font-slogan text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+              [[${title}]]
+            </h1>
+            <p class="my-6 text-base text-zinc-600 dark:text-zinc-400">
+              <span style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance">
+                [[${theme.config.custom.photos_description}]]
+              </span>
+            </p>
+          </header>
+          <main>
+            <div class="mb-8">
+              <nav class="flex flex-wrap gap-4" aria-label="Tabs">
+                <a
+                  th:href="@{/photos}"
+                  class="rounded-full bg-zinc-400 px-3 py-1.5 text-sm font-medium text-zinc-500 transition-colors dark:bg-zinc-800 dark:text-zinc-400"
+                  th:classappend="${#strings.isEmpty(param.group) ? '!bg-zinc-800 !text-zinc-200 dark:!bg-zinc-200 dark:!text-zinc-800' : ''}"
+                >
+                  全部
+                </a>
+                <a
+                  th:each="group : ${photoFinder.groupBy()}"
+                  th:href="@{|/photos?group=${group.metadata.name}|}"
+                  class="rounded-full bg-zinc-200 px-3 py-1.5 text-sm font-medium text-zinc-600 transition-colors dark:bg-zinc-800 dark:text-zinc-400"
+                  th:classappend="${#strings.equals(param.group, group.metadata.name) ? '!bg-zinc-800 !text-zinc-200 dark:!bg-zinc-200 dark:!text-zinc-800' : ''}"
+                >
+                  <span th:text="${group.spec.displayName}"></span>
+                </a>
+              </nav>
+            </div>
+            <th:block th:if="${photos.total == 0}">
+              <div class="fade-before relative z-[2] mx-auto my-16 max-w-md">
+                <div class="relative rounded-2xl border border-zinc-100 p-6 transition-opacity dark:border-zinc-700/40">
+                  <h2 class="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+                    <i class="iconfont icon-tishi"></i>
+                    <span class="ml-2">暂时没有发布瞬间</span>
+                  </h2>
+                  <p class="mt-2 text-xs text-zinc-600 md:text-sm dark:text-zinc-400">
+                    换个地方再继续搜索吧，获取你会在其他地方找到答案。
+                  </p>
+                </div>
+              </div>
+            </th:block>
+            <div
+              th:else
+              class="grid grid-cols-1 overflow-hidden rounded-lg border border-zinc-200 bg-gradient-to-b from-zinc-50/50 to-white/70 sm:grid-cols-2 sm:rounded-xl md:grid-cols-3 lg:grid-cols-4 dark:border-zinc-700/40 dark:from-zinc-900/70 dark:to-zinc-800/60"
+            >
+              <th:block th:each="photo,iterStat : ${photos}">
+                <div
+                  class="aspect-1 photo-item group relative h-[calc(36vh_-_2em)] overflow-hidden bg-gradient-to-b from-zinc-50/50 to-white/70 dark:from-zinc-900/70 dark:to-zinc-800/60"
+                >
+                  <div class="absolute bottom-2 left-2 z-10 line-clamp-1 text-sm font-semibold text-zinc-100">
+                    [[${photo.spec.description}]]
+                  </div>
+                  <img
+                    class="aspect-1 load block h-full w-full transform-gpu object-cover outline-none transition duration-500 group-hover:scale-110 group-hover:shadow"
+                    data-fancybox="gallery"
+                    th:srcset="|${thumbnail.gen(photo.spec.url, 's')} 400w,
+                  ${thumbnail.gen(photo.spec.url, 'm')} 800w, ${thumbnail.gen(photo.spec.url, 'l')} 1200w|"
+                    sizes="(max-width: 1200px) 100vw, 1200px"
+                    th:alt="${photo.spec.displayName}"
+                    th:src="${photo.spec.url}"
+                  />
+                </div>
+              </th:block>
+            </div>
+
+            <th:block th:replace="~{modules/widgets/pagination :: page('/photos',${photos})}"></th:block>
+          </main>
+        </div>
+      </div>
+    </div>
+  </th:block>
+
+  <th:block th:fragment="page_js">
+    <th:block th:replace="~{modules/widgets/fancy}"></th:block>
+  </th:block>
+</html>

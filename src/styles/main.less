@@ -1470,7 +1470,9 @@ mark {
   border-color: var(--primary-color) !important;
   color: var(--primary-color) !important;
 }
-
+.db--item:has(.db--image):hover .db--image {
+  transform: scale(1.1) translateY(-10px);
+}
 .db--title {
   font-size: 14px;
   margin-top: 0.25em;
@@ -1615,4 +1617,16 @@ mark {
       transform: translateX(-50%);
     }
   }
+}
+
+.photo-item:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgb(0 0 0 / 20%), #0000 30%, #222);
+  pointer-events: none;
+  transition: 0.5s;
+}
+.photo-item:hover:after {
+  opacity: 0;
 }
