@@ -111,7 +111,7 @@
               class="submenu no-move absolute left-[50%] z-10 min-w-[10em] max-w-52 py-2 opacity-0"
             >
               <div
-                class="no-move divide-y divide-dashed divide-zinc-200 rounded-2xl border border-zinc-200 bg-gradient-to-b from-zinc-50/50 to-white/70 px-2 py-1 text-zinc-800 dark:divide-zinc-700/40 dark:border-zinc-700/40 dark:from-zinc-900/70 dark:to-zinc-800/60 dark:text-zinc-100"
+                class="no-move divide-y divide-dashed divide-zinc-200 rounded-2xl border border-zinc-200 bg-gradient-to-b from-zinc-50/50 to-white/70 px-2 py-1 text-zinc-800 backdrop-blur-lg dark:divide-zinc-700/40 dark:border-zinc-700/40 dark:from-zinc-900/70 dark:to-zinc-800/60 dark:text-zinc-100"
               >
                 <a
                   th:each="childMenuItem : ${menuItem.children}"
@@ -209,14 +209,16 @@
           link.classList.add("text-lime-600", "dark:text-lime-400", "active");
           return; // 如果匹配，无需继续检查子菜单
         }
-
-        // 检查子菜单中是否有活动项
-        if (submenu && submenu.classList.contains("submenu")) {
-          const hasActiveChild = submenu.querySelectorAll(".active");
-          if (hasActiveChild.length) {
-            link.classList.add("text-lime-600", "dark:text-lime-400", "active");
+        // 确保上一层菜单已经添加了active类
+        setTimeout(() => {
+          // 检查子菜单中是否有活动项
+          if (submenu && submenu.classList.contains("submenu")) {
+            const hasActiveChild = submenu.querySelectorAll(".active");
+            if (hasActiveChild.length) {
+              link.classList.add("text-lime-600", "dark:text-lime-400", "active");
+            }
           }
-        }
+        }, 1);
       });
     }
 
