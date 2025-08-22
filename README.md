@@ -1,8 +1,14 @@
 <div align="center">
     <h1 align="center">Halo Theme Vapor</h1>
+    <p align="center" style="text-align: center;">
+        <a href="https://www.halo.run/store/apps/app-ot0zaok6?tab=readme"><img alt="Halo App Store" src="https://img.shields.io/badge/Halo-%E5%BA%94%E7%94%A8%E5%B8%82%E5%9C%BA-%230A81F5?style=flat-square&logo=appstore&logoColor=%23fff" /></a>
+        <a href="https://github.com/iscottt/halo-theme-vapor/releases"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/iscottt/halo-theme-vapor?style=flat-square&logo=github" /></a>
+        <a href="./LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/iscottt/halo-theme-vapor?style=flat-square" /></a>
+    </p>
     <a href="https://halo.scott-studio.cn" target="_blank" rel="noopener noreferrer">
         <img src="https://github.com/user-attachments/assets/3844b1fe-0967-4dc6-862a-99d0dbaac9df" alt="icon"/>
     </a>
+    <br />
 </div>
 
 ## 🎊 声明
