@@ -278,11 +278,11 @@ module.exports = {
           },
           "tbody tr": {
             borderBottomWidth: "1px",
-            height:'auto !important',
+            height: "auto !important",
             borderBottomColor: "var(--tw-prose-td-borders)",
           },
           "tbody tr p": {
-            margin: 0
+            margin: 0,
           },
           "tbody tr:last-child": {
             borderBottomWidth: 0,
@@ -551,8 +551,9 @@ module.exports = {
     "dark:text-black",
     "dark:hover:bg-zinc-300",
     "dark:active:bg-zinc-300/70",
-    'max-w-[69%]',
-    'bg-blue-400/20',
-    'dark:bg-blue-400/20'
+    "max-w-[69%]",
+    "bg-blue-400/20",
+    "dark:bg-blue-400/20",
+    "text-[14px]",
   ],
 };

@@ -1,7 +1,7 @@
 <header
   class="site-header fixed top-[1rem] z-50 w-full md:top-[3rem]"
   th:with="menu = ${menuFinder.getPrimary()}"
-  x-data="{ open : false }"
+  x-data="{ open : false,show:false }"
 >
   <div class="relative mx-auto flex max-w-7xl gap-4 px-4 lg:px-16">
     <div class="site-logo relative z-[1] flex flex-1 items-center">
@@ -23,7 +23,6 @@
           type="button"
           aria-expanded="false"
           data-headlessui-state=""
-          id="headlessui-popover-button-:Rll5iula:"
           @click="showMobileNav = !showMobileNav"
         >
           前往 <i class="iconfont icon-caret-down-solid ml-1 !text-xs !leading-[1]"></i>
@@ -67,6 +66,22 @@
               >
                 [[${menuItem.status.displayName}]]
               </a>
+
+              <ul
+                th:if="${not #lists.isEmpty(menuItem.children)}"
+                class="ml-4 divide-y divide-zinc-500/20 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300"
+              >
+                <li th:each="childMenuItem : ${menuItem.children}">
+                  <a
+                    class="block py-2"
+                    aria-current="page"
+                    th:href="@{${childMenuItem.status.href}}"
+                    th:target="${childMenuItem.spec.target?.value}"
+                  >
+                    [[${childMenuItem.status.displayName}]]
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -82,15 +97,32 @@
           th:with="menuItems = ${menu.menuItems}"
           class="flex list-none bg-transparent px-3 text-sm font-medium text-zinc-800 dark:text-zinc-200"
         >
-          <li th:each="menuItem : ${menu.menuItems}">
+          <li th:each="menuItem : ${menu.menuItems}" class="site-nav relative">
             <a
-              class="header-menu-link relative block whitespace-nowrap px-3 py-2 transition before:absolute before:inset-x-1 before:-bottom-px before:h-[1px] before:bg-gradient-to-r before:from-lime-700/0 before:via-lime-700/70 before:to-lime-700/0 before:opacity-0 before:content-[''] hover:text-lime-600 before:dark:from-lime-400/0 before:dark:via-lime-400/40 before:dark:to-lime-400/0 dark:hover:text-lime-400"
+              class="header-menu-link block whitespace-nowrap px-3 py-2 transition before:absolute before:inset-x-1 before:-bottom-px before:h-[1px] before:bg-gradient-to-r before:from-lime-700/0 before:via-lime-700/70 before:to-lime-700/0 before:opacity-0 before:content-[''] hover:text-lime-600 before:dark:from-lime-400/0 before:dark:via-lime-400/40 before:dark:to-lime-400/0 dark:hover:text-lime-400"
               aria-current="page"
               th:href="@{${menuItem.status.href}}"
               th:target="${menuItem.spec.target?.value}"
             >
               [[${menuItem.status.displayName}]]
             </a>
+            <div
+              th:if="${not #lists.isEmpty(menuItem.children)}"
+              class="submenu no-move absolute left-[50%] z-10 min-w-[10em] max-w-52 py-2 opacity-0"
+            >
+              <div
+                class="no-move divide-y divide-dashed divide-zinc-200 rounded-2xl border border-zinc-200 bg-gradient-to-b from-zinc-50/50 to-white/70 px-2 py-1 text-zinc-800 dark:divide-zinc-700/40 dark:border-zinc-700/40 dark:from-zinc-900/70 dark:to-zinc-800/60 dark:text-zinc-100"
+              >
+                <a
+                  th:each="childMenuItem : ${menuItem.children}"
+                  class="header-menu-link no-move flex items-center gap-x-3.5 px-3 py-2 text-sm transition duration-300 hover:text-lime-600 dark:hover:text-lime-400"
+                  th:href="@{${childMenuItem.status.href}}"
+                  th:text="${childMenuItem.status.displayName}"
+                  th:target="${childMenuItem.spec.target?.value}"
+                >
+                </a>
+              </div>
+            </div>
           </li>
         </ul>
       </nav>
@@ -136,6 +168,16 @@
       >
         <a id="theme-toggle-icon" class="iconfont has-tip" title="切换浅色模式" role="button"></a>
       </button>
+
+      <th:block th:if="${roleName == 'super-role'}">
+        <a href="/console" target="_blank" th:data-tooltip="去后台">
+          <img
+            th:src="${contributor.avatar}"
+            alt="去后台"
+            class="size-8 rounded-full shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:ring-white/10 dark:hover:ring-white/20"
+          />
+        </a>
+      </th:block>
     </div>
   </div>
 </header>
@@ -153,13 +195,33 @@
         targets[idx].style = styleStr;
       });
     }
-    initImgColor();
-    document.querySelectorAll(".header-menu-link").forEach(function (link) {
-      if (link.getAttribute("href") === window.location.pathname) {
-        link.classList.add("text-lime-600", "dark:text-lime-400", "active");
-      }
-    });
+    // 优化后的代码
+    function updateActiveMenu() {
+      const currentPath = window.location.pathname;
+      const menuLinks = document.querySelectorAll(".header-menu-link");
+
+      menuLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        const submenu = link.nextElementSibling;
+
+        // 检查当前链接是否匹配
+        if (href === currentPath) {
+          link.classList.add("text-lime-600", "dark:text-lime-400", "active");
+          return; // 如果匹配，无需继续检查子菜单
+        }
+
+        // 检查子菜单中是否有活动项
+        if (submenu && submenu.classList.contains("submenu")) {
+          const hasActiveChild = submenu.querySelectorAll(".active");
+          if (hasActiveChild.length) {
+            link.classList.add("text-lime-600", "dark:text-lime-400", "active");
+          }
+        }
+      });
+    }
+
     function navMousemove(e) {
+      if (e.target.classList.contains("no-move")) return;
       const target = document.querySelector(".menu-nav");
       const mask = document.querySelector(".nav-mask");
       const { clientX, clientY, currentTarget } = e;
@@ -171,5 +233,7 @@
     }
     const el = document.querySelector(".menu-nav");
     el.addEventListener("mousemove", navMousemove);
+    initImgColor();
+    updateActiveMenu();
   });
 </script>

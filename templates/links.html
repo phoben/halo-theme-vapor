@@ -21,7 +21,13 @@
             <div
               class="blur-before flex items-center gap-1 py-14 font-bold text-zinc-600 after:ml-2 after:h-0 after:flex-1 after:border-b after:border-dashed after:border-zinc-100 after:content-[''] sm:py-8 dark:text-zinc-200 after:dark:border-zinc-700/40"
             >
+              <span
+                th:if="${#annotations.contains(group, 'icon') and #annotations.get(group, 'icon') != ''}"
+                class="iconify h-6 w-6"
+                th:data-icon="${#annotations.get(group, 'icon')}"
+              ></span>
               <svg
+                th:unless="${#annotations.contains(group, 'icon') and #annotations.get(group, 'icon') != ''}"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"

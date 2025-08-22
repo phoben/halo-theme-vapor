@@ -237,7 +237,7 @@ figure.f-carousel.wp-block-gallery:not(.alignfull) .f-carousel__nav .f-button {
 
 .wp-block-table :is(td, th) {
   padding-inline: 1em;
-  padding: .5em;
+  padding: 0.5em;
   border: var(--vapor--border);
   border-width: thin thin 0 0;
 }
@@ -275,4 +275,11 @@ figure.f-carousel.wp-block-gallery:not(.alignfull) .f-carousel__nav .f-button {
   position: sticky;
   left: 0;
   white-space: normal;
+}
+.prose-moments p {
+  margin: 0.25rem 0 !important;
+}
+
+.prose-moments p:last-of-type {
+  margin: 0 !important;
 }

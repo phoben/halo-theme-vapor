@@ -41,13 +41,13 @@
   /* 区块 */
   --vapor--height-head: 4rem;
   --vapor--sticky-head: var(--vapor--height-head);
-  --vapor--border: 1px solid #3f3f4666;
+  --vapor--border: 1px solid #3f3f4611;
   --vapor--shadow-normal: 0 0.2rem 1rem 0 hsl(0deg 0% 15% / 10%);
   --vapor--shadow-white: 0 0.2rem 1rem 0 hsl(0deg 0% 15% / 4%);
   --vapor--moments-white: rgba(255, 255, 255, 0.4);
   --vapor--moments-analogous: rgba(255, 171, 0, 0.3);
-  --vapor--moments-analogous-df:#ffa000;
-  --vapor--moments-primary:#FFA000;
+  --vapor--moments-analogous-df: #ffa000;
+  --vapor--moments-primary: #ffa000;
 
   --animation-on: cubic-bezier(0.6, 0.1, 0, 1);
   --animation-in: cubic-bezier(0.6, 0.2, 0.25, 1);
@@ -87,6 +87,7 @@
   --vapor--color-back-white: hsl(214deg 5% 10%);
   --vapor--color-back-shift: 214deg 5% 20% / 50%;
   --vapor--color-font-fill: var(--vapor--color-back-have);
+  --vapor--border: 1px solid #3f3f4666;
   --bg-color: #000212;
   --vapor--moments-white: rgba(52, 57, 65, 0.4);
   --vapor--moments-analogous: rgba(255, 160, 0, 0.3);
@@ -1560,43 +1561,58 @@ mark {
   gap: 1em;
 }
 /* Moments */
-.moments-list{
-
-    columns: 22.5rem 3;
-    margin: auto;
-    align-content: center;
-    gap: 1.5rem;
+.moments-list {
+  columns: 22.5rem 3;
+  margin: auto;
+  align-content: center;
+  gap: 1.5rem;
 }
-.moments-item{
+.moments-item {
   break-inside: avoid;
   margin: 0 0 1.5rem;
 }
-.moments-item .tag{
+.moments-item .tag {
   display: inline-flex;
   align-items: center;
-  gap: .25rem;
-  padding: .25rem .5rem;
-  border-radius:10px;
-  font-size: .75rem;
-  background: #EaEaEa;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  background: #eaeaea;
   color: #71717a;
   line-height: 1;
   text-decoration: none;
 }
-.moments-item .tag::before{
-  content:'\e6de';
+.moments-item .tag::before {
+  content: "\e6de";
   font-family: iconfont;
 }
-.dark .moments-item .tag{
+.dark .moments-item .tag {
   color: #a1a1aa;
   background: #27272a;
 }
-.media-large-wrapper{
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+.media-large-wrapper {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
-.media-large{
+.media-large {
   grid-row: span 2;
   height: 100% !important;
+}
+
+.site-nav {
+  .submenu {
+    transition: 0.5s cubic-bezier(0.6, 0.1, 0, 1);
+    transform-origin: left top;
+    transform: translateX(-50%) translateY(-1em);
+    pointer-events: none;
+  }
+  &:hover {
+    .submenu {
+      pointer-events: auto;
+      opacity: 1;
+      transform: translateX(-50%);
+    }
+  }
 }
