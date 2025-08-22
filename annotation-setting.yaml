@@ -7,6 +7,12 @@ spec:
     group: core.halo.run
     kind: LinkGroup
   formSchema:
+    - $formkit: checkbox
+      name: "hide"
+      label: "隐藏"
+      value: "false"
+      on-value: "true"
+      off-value: "false"
     - $formkit: text
       name: "icon"
       label: "图标"
