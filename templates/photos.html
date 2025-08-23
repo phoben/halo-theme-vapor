@@ -13,7 +13,7 @@
             </h1>
             <p class="my-6 text-base text-zinc-600 dark:text-zinc-400">
               <span style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance">
-                [[${theme.config.custom.photos_description}]]
+                [[${theme.config.pluginPage.photos_description}]]
               </span>
             </p>
           </header>
@@ -81,6 +81,12 @@
             </div>
 
             <th:block th:replace="~{modules/widgets/pagination :: page('/photos',${photos})}"></th:block>
+
+            <div class="mt-8" th:if="${theme.config.pluginPage.photos_comment}">
+              <th:block
+                th:replace="~{modules/widgets/comment :: page('PluginPhotos','Plugin','plugin.halo.run')}"
+              ></th:block>
+            </div>
           </main>
         </div>
       </div>

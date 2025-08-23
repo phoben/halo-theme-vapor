@@ -15,18 +15,18 @@
   <th:block th:fragment="content">
     <div class="relative z-[2] mt-32 sm:px-8 lg:mt-48">
       <div class="mx-auto max-w-7xl lg:px-8">
-        <article class="fade-before relative px-4 md:px-8">
+        <article class="relative px-4 md:px-8">
           <header class="fade-before relative z-[2] max-w-2xl">
             <h1 class="font-slogan text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
               [[${title}]]
             </h1>
             <p class="my-6 text-base text-zinc-600 dark:text-zinc-400">
               <span style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance">
-                [[${theme.config.custom.douban_description}]]
+                [[${theme.config.pluginPage.douban_description}]]
               </span>
             </p>
           </header>
-          <section class="db--container">
+          <section class="fade-before db--container">
             <nav class="db--nav">
               <div
                 th:each="type : ${types}"
@@ -48,6 +48,12 @@
               <div class="lds-ripple u-hide"></div>
             </div>
           </section>
+
+          <div class="mt-8" th:if="${theme.config.pluginPage.douban_comment}">
+            <th:block
+              th:replace="~{modules/widgets/comment :: page('PluginDouban','Plugin','plugin.halo.run')}"
+            ></th:block>
+          </div>
         </article>
       </div>
     </div>

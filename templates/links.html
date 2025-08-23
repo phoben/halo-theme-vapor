@@ -82,7 +82,7 @@
             </ul>
           </details>
           <a
-            class="blur-before button has-thyuu-color iconfont icon-add"
+            class="blur-before button has-thyuu-color iconfont icon-add mb-8"
             data-fancybox=""
             data-src="#add"
             data-slug="add"
@@ -90,6 +90,11 @@
           >
             <span>添加友链</span>
           </a>
+          <th:block th:if="${theme.config.links.enable_comment}">
+            <th:block
+              th:replace="~{modules/widgets/comment :: page(${pluginName},'Plugin','plugin.halo.run')}"
+            ></th:block>
+          </th:block>
         </div>
       </div>
     </div>
@@ -97,6 +102,7 @@
 </html>
 <th:block th:fragment="page_js">
   <th:block th:replace="~{modules/widgets/fancy}"></th:block>
+  <script th:src="@{/assets/js/marked.umd.js?v={version}(version='1.2.2')}"></script>
 </th:block>
 <script>
   document.addEventListener("DOMContentLoaded", () => {

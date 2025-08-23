@@ -13,7 +13,7 @@
             </h1>
             <p class="my-6 text-base text-zinc-600 dark:text-zinc-400">
               <span style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance">
-                [[${theme.config.custom.moments_description}]]
+                [[${theme.config.pluginPage.moments_description}]]
               </span>
             </p>
           </header>
@@ -110,6 +110,11 @@
             </ul>
 
             <th:block th:replace="~{modules/widgets/pagination :: page('/moments',${moments})}"></th:block>
+            <div class="mt-8" th:if="${theme.config.pluginPage.moments_comment}">
+              <th:block
+                th:replace="~{modules/widgets/comment :: page('PluginMoments','Plugin','plugin.halo.run')}"
+              ></th:block>
+            </div>
           </main>
         </div>
       </div>

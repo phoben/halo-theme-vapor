@@ -207,7 +207,11 @@
                 © 本文著作权归作者所有，未经许可不得转载使用。
               </div>
 
-              <th:block th:replace="~{modules/widgets/comment :: page(${post},'Post')}"></th:block>
+              <th:block th:if="${post.spec.allowComment}">
+                <th:block
+                  th:replace="~{modules/widgets/comment :: page(${post.metadata.name},'Post','content.halo.run')}"
+                ></th:block>
+              </th:block>
             </main>
             <aside class="group hidden w-[160px] shrink-0 lg:block" id="toc">
               <div class="sticky top-2 pt-20">
@@ -248,6 +252,7 @@
     main.generateToc();
     main.prettifyContainer(".format-num");
     main.replaceLinksInElement(document.getElementById("content"));
+    main.replaceLinksInElement(document.getElementById("comments"));
     const goCommentBtn = document.getElementById("go-comment");
     goCommentBtn.addEventListener("click", () => {
       const respond = document.getElementById("respond");

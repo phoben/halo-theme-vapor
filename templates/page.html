@@ -72,7 +72,11 @@
                 class="prose relative mt-8 grid-cols-7 dark:prose-invert"
                 id="content"
               ></article>
-              <th:block th:replace="~{modules/widgets/comment :: page(${singlePage},'SinglePage')}"></th:block>
+              <th:block th:if="${singlePage.spec.allowComment}">
+                <th:block
+                  th:replace="~{modules/widgets/comment :: page(${singlePage.metadata.name},'SinglePage','content.halo.run')}"
+                ></th:block>
+              </th:block>
             </main>
             <th:block
               th:with="featured_focus_num=${#conversions.convert(theme.config.layout.featured_focus_num, 'java.lang.Integer')}"
@@ -158,5 +162,6 @@
   document.addEventListener("DOMContentLoaded", () => {
     main.prettifyContainer(".format-num");
     main.replaceLinksInElement(document.getElementById("content"));
+    main.replaceLinksInElement(document.getElementById("comments"));
   });
 </script>

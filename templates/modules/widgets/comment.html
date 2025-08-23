@@ -1,15 +1,15 @@
-<th:block th:fragment="page(post,kind)" th:if="${post.spec.allowComment}">
+<th:block th:fragment="page(name,kind,group)">
   <script
     type="text/javascript"
     th:src="@{/assets/plugins/comment-widget/commentWidget.min.js?ver={version}(version=${theme.spec.version})}"
   ></script>
   <div id="respond"></div>
-  <div th:id="|comment-content-halo-run-Post-${post.metadata.name}|"></div>
+  <div th:id="|comment-content-halo-run-${kind}-${name}|"></div>
   <script>
-    commentWidget.init(`#comment-content-halo-run-Post-[[${post.metadata.name}]]`, {
-      group: "content.halo.run",
+    commentWidget.init(`#comment-content-halo-run-[[${kind}]]-[[${name}]]`, {
+      group: "[[${group}]]",
       kind: "[[${kind}]]",
-      name: "[[${post.metadata.name}]]",
+      name: "[[${name}]]",
       size: 10,
       replySize: 10,
       withReplies: true,
@@ -20,7 +20,6 @@
       placeholder: "一句走心评论，胜过千言万语",
     });
   </script>
-
   <script
     type="text/javascript"
     th:src="@{/assets/plugins/comment-widget/comment-reply.min.js?ver={version}(version=${theme.spec.version})}"

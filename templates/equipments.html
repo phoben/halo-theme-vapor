@@ -13,7 +13,7 @@
             </h1>
             <p class="my-6 text-base text-zinc-600 dark:text-zinc-400">
               <span style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance">
-                [[${theme.config.custom.equipment_description}]]
+                [[${theme.config.pluginPage.equipment_description}]]
               </span>
             </p>
           </header>
@@ -83,6 +83,12 @@
                 </li>
               </ul>
             </th:block>
+
+            <div class="mt-8" th:if="${theme.config.pluginPage.equipment_comment}">
+              <th:block
+                th:replace="~{modules/widgets/comment :: page('PluginEquipments','Plugin','plugin.halo.run')}"
+              ></th:block>
+            </div>
           </main>
         </div>
       </div>
