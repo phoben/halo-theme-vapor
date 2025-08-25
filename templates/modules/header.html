@@ -27,64 +27,68 @@
         >
           前往 <i class="iconfont icon-caret-down-solid ml-1 !text-xs !leading-[1]"></i>
         </button>
-        <div
-          x-show="showMobileNav"
-          x-transition
-          class="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur dark:bg-black/80"
-        ></div>
         <!-- panel -->
-        <div
-          x-show="showMobileNav"
-          x-transition
-          class="fixed inset-x-4 top-8 z-[52] origin-top rounded-3xl bg-gradient-to-b from-zinc-100/75 to-white p-8 ring-1 ring-zinc-900/5 dark:from-zinc-900/50 dark:to-zinc-900 dark:ring-zinc-800"
-          id="headlessui-popover-panel-:r55:"
-          tabindex="-1"
-          data-headlessui-state="open"
-        >
-          <div class="flex flex-row-reverse items-center justify-between">
-            <button
-              @click="showMobileNav = false"
-              aria-label="关闭菜单"
-              type="button"
-              data-headlessui-state="open"
-              class="iconfont icon-close -m-1 p-1 text-zinc-600 dark:text-zinc-400"
-            ></button>
-            <h2 class="text-sm font-medium text-zinc-600 dark:text-zinc-400">站内导航</h2>
-          </div>
-          <ul
-            th:with="menuItems = ${menu.menuItems}"
-            class="-my-2 mt-6 divide-y divide-zinc-500/20 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300"
+        <template x-teleport="body">
+          <div
+            x-show="showMobileNav"
+            x-transition
+            class="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur dark:bg-black/80"
+          ></div>
+        </template>
+        <template x-teleport="body">
+          <div
+            x-show="showMobileNav"
+            x-transition
+            class="fixed inset-x-4 top-8 z-[52] origin-top rounded-3xl bg-gradient-to-b from-zinc-100/75 to-white p-8 ring-1 ring-zinc-900/5 dark:from-zinc-900/50 dark:to-zinc-900 dark:ring-zinc-800"
+            id="headlessui-popover-panel-:r55:"
+            tabindex="-1"
+            data-headlessui-state="open"
           >
-            <li th:each="menuItem : ${menu.menuItems}">
-              <a
+            <div class="flex flex-row-reverse items-center justify-between">
+              <button
                 @click="showMobileNav = false"
-                class="block py-2"
+                aria-label="关闭菜单"
+                type="button"
                 data-headlessui-state="open"
-                aria-current="page"
-                th:href="@{${menuItem.status.href}}"
-                th:target="${menuItem.spec.target?.value}"
-              >
-                [[${menuItem.status.displayName}]]
-              </a>
+                class="iconfont icon-close -m-1 p-1 text-zinc-600 dark:text-zinc-400"
+              ></button>
+              <h2 class="text-sm font-medium text-zinc-600 dark:text-zinc-400">站内导航</h2>
+            </div>
+            <ul
+              th:with="menuItems = ${menu.menuItems}"
+              class="-my-2 mt-6 divide-y divide-zinc-500/20 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300"
+            >
+              <li th:each="menuItem : ${menu.menuItems}">
+                <a
+                  @click="showMobileNav = false"
+                  class="block py-2"
+                  data-headlessui-state="open"
+                  aria-current="page"
+                  th:href="@{${menuItem.status.href}}"
+                  th:target="${menuItem.spec.target?.value}"
+                >
+                  [[${menuItem.status.displayName}]]
+                </a>
 
-              <ul
-                th:if="${not #lists.isEmpty(menuItem.children)}"
-                class="divide-y divide-zinc-500/20 pl-[2em] text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300"
-              >
-                <li th:each="childMenuItem : ${menuItem.children}">
-                  <a
-                    class="block py-2"
-                    aria-current="page"
-                    th:href="@{${childMenuItem.status.href}}"
-                    th:target="${childMenuItem.spec.target?.value}"
-                  >
-                    [[${childMenuItem.status.displayName}]]
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
+                <ul
+                  th:if="${not #lists.isEmpty(menuItem.children)}"
+                  class="divide-y divide-zinc-500/20 pl-[2em] text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300"
+                >
+                  <li th:each="childMenuItem : ${menuItem.children}">
+                    <a
+                      class="block py-2"
+                      aria-current="page"
+                      th:href="@{${childMenuItem.status.href}}"
+                      th:target="${childMenuItem.spec.target?.value}"
+                    >
+                      [[${childMenuItem.status.displayName}]]
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </template>
       </div>
       <nav
         class="menu-nav group pointer-events-auto relative z-50 hidden rounded-full bg-gradient-to-b from-zinc-50/70 to-white/90 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md [--spotlight-color:rgb(236_252_203_/_0.6)] md:block dark:from-zinc-900/70 dark:to-zinc-800/90 dark:ring-zinc-100/10 dark:[--spotlight-color:rgb(217_249_157_/_0.07)]"
