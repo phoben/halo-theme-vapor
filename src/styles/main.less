@@ -1615,6 +1615,14 @@ mark {
     transform-origin: left top;
     transform: translateX(-50%) translateY(-1em);
     pointer-events: none;
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0.5rem 0;
+      border-radius: 1rem;
+      pointer-events: none;
+      transition: 0.5s cubic-bezier(0.6, 0.1, 0, 1);
+    }
   }
   &:hover {
     .submenu {
