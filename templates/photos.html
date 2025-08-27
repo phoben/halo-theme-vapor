@@ -73,7 +73,7 @@
                 </div>
               </th:block>
               <div
-                th:if="${#lists.size(photos) % 4} != 0"
+                th:if="${#lists.size(photos.items) % 4} > 0"
                 class="aspect-1 group relative flex h-[calc(36vh_-_2em)] items-center justify-center overflow-hidden bg-gradient-to-b from-zinc-50/50 to-white/70 text-zinc-400 dark:from-zinc-900/70 dark:to-zinc-800/60 dark:text-zinc-500"
               >
                 <p>没有更多了...</p>
