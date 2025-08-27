@@ -57,6 +57,9 @@
         </article>
       </div>
     </div>
-    <script th:src="@{/plugins/plugin-douban/assets/static/db.min.js?v={version}(version='1.2.2')}"></script>
+    <th:block th:fragment="page_js">
+      <script th:src="@{/plugins/plugin-douban/assets/static/db.min.js?v={version}(version='1.2.2')}"></script>
+      <script th:src="@{/assets/js/marked.umd.js?v={version}(version='1.2.2')}"></script>
+    </th:block>
   </th:block>
 </html>

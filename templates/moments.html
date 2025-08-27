@@ -123,5 +123,6 @@
 
   <th:block th:fragment="page_js">
     <th:block th:replace="~{modules/widgets/fancy}"></th:block>
+    <script th:src="@{/assets/js/marked.umd.js?v={version}(version='1.2.2')}"></script>
   </th:block>
 </html>
