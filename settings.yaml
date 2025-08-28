@@ -235,3 +235,44 @@ spec:
           value: "true"
           on-value: "true"
           off-value: "false"
+        - $formkit: text
+          name: search_description
+          label: 搜索页面描述
+          value: 搜索方式覆盖标题、摘要和全文，建议扩大词意搜索。
+        - $formkit: code
+          name: notfound_content
+          label: 404页面文案
+          height: 200px
+          language: html
+          value: '
+            <h1 class="!mb-4 text-2xl font-bold">很抱歉，您访问的页面迷路啦～</h1>
+            <p class="text-zinc-500 dark:text-zinc-400">
+            它可能去探索星辰大海，也可能在代码丛林里迷了路。别担心，我们帮您找回家的方向：
+            </p>
+            <ul class="!mt-8 list-disc space-y-2 pl-5 text-zinc-600 dark:text-zinc-400">
+            <li>
+            ✨ 点击
+            <a href="/" class="font-bold text-zinc-500 hover:underline">首页</a>
+            ，开启新的探索之旅
+            </li>
+            <li>🧭 用顶部搜索栏找找你心仪的内容</li>
+            <li>📫 若有特别想念的页面，不妨给我留言 “召唤” 它～</li>
+            </ul>
+            <p>稍等片刻，让我们一起重新点亮这个角落吧 🌟</p>'
+        - $formkit: code
+          name: error_content
+          label: 5xx页面文案
+          height: 200px
+          language: html
+          value: '<h1 class="!mb-4 text-2xl font-bold">哎呀，看来服务器此刻有点小迷糊～</h1>
+            <p class="text-zinc-500 dark:text-zinc-400">
+            您访问的页面暂时无法顺利加载，这可能是我们正在进行后台维护，或是突如其来的流量小高峰导致的小插曲。
+            </p>
+            <p class="font-semibold">别担心，技术小哥已经收到信号，正在快马加鞭处理啦！</p>
+            <p>您可以尝试：</p>
+            <ul class="!mt-8 list-disc space-y-2 pl-5 text-zinc-600 dark:text-zinc-400">
+            <li>🌱 刷新页面再试一次</li>
+            <li>🧭 稍后几分钟重新访问</li>
+            <li>📫 若问题持续，欢迎留言告诉我们具体情况</li>
+            </ul>
+            <p>感谢您的耐心等待，我们会尽快让一切恢复正常～ 🌟</p>'

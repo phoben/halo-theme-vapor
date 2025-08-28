@@ -13,8 +13,10 @@
                 搜索：「[[${searchResult.keyword}]]」
               </h1>
               <p class="my-6 text-base text-zinc-600 dark:text-zinc-400">
-                <span style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance">
-                  搜索方式覆盖标题、摘要和全文，建议扩大词意搜索。
+                <span
+                  style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance"
+                  th:text="${theme.config.pluginPage.search_description}"
+                >
                 </span>
               </p>
               <p class="flex items-center">
