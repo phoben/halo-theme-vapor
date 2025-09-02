@@ -94,7 +94,7 @@
       type="text/javascript"
     ></script>
     <script>
-      main.initializeColorScheme("[[${theme.config.style.color_scheme}]]", [[${ theme.config.style.enable_change_color_scheme }]])
+      main.initializeColorScheme("[[${theme.config.style.color_scheme}]]");
     </script>
     <th:block th:if="${page_js != null}">
       <th:block th:replace="${page_js}" />

@@ -38,6 +38,7 @@ function updateDocumentTheme(theme: themeType) {
  * @param {boolean} useSavedScheme - 是否使用本地存储中保存的方案
  */
 export function initializeColorScheme(defaultScheme: themeType, useSavedScheme = true) {
+  console.log("123123123123");
   let schemeToApply: themeType = defaultScheme;
 
   // 优先使用本地存储中保存的方案
