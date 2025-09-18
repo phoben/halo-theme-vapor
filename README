@@ -1,0 +1,412 @@
+# Halo Theme Vapor-Gridfriend - 技术设计文档 (TDD)
+
+## 项目概述
+
+**项目名称**: Halo Theme Vapor-Gridfriend  
+**版本**: 1.0.9  
+**作者**: SCOTT Studio  
+**描述**: 一个极简风格的Halo博客主题，基于现代前端技术栈构建  
+**许可证**: Apache License 2.0  
+**Halo版本要求**: >=2.0.0  
+
+## 技术架构
+
+### 1. 整体架构设计
+
+```
+halo-theme-vapor-gridfriend/
+├── 主题配置层 (theme.yaml, settings.yaml)
+├── 模板渲染层 (templates/)
+├── 前端资源层 (src/, lit-components/)
+├── 构建工具层 (vite, gradle, pnpm)
+└── 静态资源层 (assets/)
+```
+
+### 2. 核心技术栈
+
+#### 2.1 前端框架与库
+- **Alpine.js**: 轻量级响应式框架，用于页面交互逻辑
+- **Lit Elements**: Web Components框架，用于构建可复用组件
+- **TypeScript**: 类型安全的JavaScript超集
+- **Tailwind CSS**: 原子化CSS框架
+- **Less**: CSS预处理器
+
+#### 2.2 构建工具链
+- **Vite**: 现代前端构建工具，支持热更新和快速构建
+- **Gradle**: Java生态构建工具，用于主题打包
+- **PNPM**: 高效的包管理器
+- **PostCSS**: CSS后处理器，配合Autoprefixer使用
+
+#### 2.3 代码质量工具
+- **ESLint**: JavaScript/TypeScript代码检查
+- **Prettier**: 代码格式化工具
+- **Husky**: Git hooks管理
+- **lint-staged**: 暂存文件检查
+
+## 文件结构详解
+
+### 1. 根目录配置文件
+
+```
+├── theme.yaml              # Halo主题元数据配置
+├── settings.yaml           # 主题设置表单定义
+├── build.gradle           # Gradle构建配置
+├── package.json           # Node.js依赖管理
+├── vite.config.ts         # Vite构建配置
+├── tailwind.config.js     # Tailwind CSS配置
+├── tsconfig.json          # TypeScript编译配置
+└── postcss.config.js      # PostCSS配置
+```
+
+### 2. 源码目录结构
+
+```
+src/
+├── main.ts                # 主入口文件
+├── styles/                # 样式文件
+│   ├── main.less         # 主样式文件
+│   └── tailwind.css      # Tailwind基础样式
+├── functions/             # 功能模块
+│   ├── theme/            # 主题切换功能
+│   ├── message/          # 消息提示功能
+│   ├── toc/              # 目录生成功能
+│   ├── links/            # 链接处理功能
+│   └── nums/             # 数字格式化功能
+└── utils/                # 工具函数
+    ├── color/            # 颜色处理工具
+    └── index.ts          # 工具函数入口
+```
+
+### 3. 模板目录结构
+
+```
+templates/
+├── index.html            # 首页模板
+├── post.html             # 文章页模板
+├── page.html             # 页面模板
+├── archives.html         # 归档页模板
+├── category.html         # 分类页模板
+├── tag.html              # 标签页模板
+├── search.html           # 搜索页模板
+├── links.html            # 友链页模板
+├── moments.html          # 瞬间页模板
+├── photos.html           # 相册页模板
+├── douban.html           # 豆瓣页模板
+├── equipments.html       # 装备页模板
+├── modules/              # 模块组件
+│   ├── layout.html       # 布局模板
+│   ├── head.html         # 头部模板
+│   ├── header.html       # 导航模板
+│   ├── post-card.html    # 文章卡片
+│   ├── search-item.html  # 搜索项
+│   ├── variables/        # 变量定义
+│   └── widgets/          # 小部件
+├── error/                # 错误页面
+│   ├── 404.html         # 404错误页
+│   └── 5xx.html         # 服务器错误页
+└── assets/               # 静态资源
+    ├── dist/            # 构建输出
+    ├── js/              # JavaScript文件
+    ├── fonts/           # 字体文件
+    ├── imgs/            # 图片资源
+    └── lit-dist/        # Lit组件构建输出
+```
+
+### 4. Lit组件目录
+
+```
+lit-components/
+├── src/                  # 组件源码
+│   ├── components/       # 组件定义
+│   ├── index.ts         # 组件入口
+│   └── custom-lit-element.ts # 自定义基础组件
+├── package.json         # 组件包配置
+├── vite.config.lib.ts   # 组件构建配置
+└── tsconfig.json        # TypeScript配置
+```
+
+## 构建流程
+
+### 1. 开发环境构建
+
+```bash
+# 安装依赖
+pnpm install
+
+# 开发模式 (监听文件变化)
+pnpm run dev
+
+# Lit组件开发
+cd lit-components && pnpm run dev
+```
+
+### 2. 生产环境构建
+
+```bash
+# 构建前端资源
+pnpm run build
+
+# 构建Lit组件
+cd lit-components && pnpm run build
+
+# 打包主题
+pnpm run build  # 包含theme-package命令
+```
+
+### 3. 构建产物
+
+- **主要输出**: `templates/assets/dist/main.iife.js`
+- **Lit组件输出**: `templates/assets/lit-dist/vapor-lit-wc.iife.js`
+- **样式输出**: 内联到JavaScript文件中
+- **主题包**: 通过`@halo-dev/theme-package-cli`生成
+
+## 核心功能模块
+
+### 1. 主题切换系统 (`src/functions/theme/`)
+
+**功能**: 支持明暗主题切换，包含系统主题跟随
+**技术实现**:
+- Cookie存储用户偏好
+- CSS类名动态切换
+- 系统主题变化监听
+- 全局主题状态管理
+
+### 2. 消息提示系统 (`src/functions/message/`)
+
+**功能**: 全局消息提示组件
+**技术实现**:
+- 单例模式设计
+- 支持多种消息类型
+- 自动消失机制
+- 动画效果支持
+
+### 3. 目录生成系统 (`src/functions/toc/`)
+
+**功能**: 自动生成文章目录
+**技术实现**:
+- 基于tocbot库
+- 标题层级识别
+- 滚动定位同步
+- 响应式适配
+
+### 4. 颜色提取系统 (`src/utils/color/`)
+
+**功能**: 从图片提取主色调
+**技术实现**:
+- ColorThief算法
+- 本地存储缓存
+- 亮度饱和度检测
+- 色彩调色板生成
+
+## 样式系统设计
+
+### 1. CSS变量系统
+
+```css
+:root {
+  /* 主色调 */
+  --vapor--main-color: 84.8deg 85.23% 34.51%;
+  --vapor--subs-color: 82.71deg 77.97% 55.49%;
+  
+  /* 字体系统 */
+  --vapor--font-family-normal: "Manrope", "PingFang SC", "Noto Sans SC", sans-serif;
+  --vapor--font-family-coder: "Monaco", "Consolas", var(--vapor--font-family-normal);
+  
+  /* 尺寸系统 */
+  --vapor--size-normal: 16px;
+  --vapor--height-head: 4rem;
+  
+  /* 阴影系统 */
+  --vapor--shadow-normal: 0 0.2rem 1rem 0 hsl(0deg 0% 15% / 10%);
+}
+```
+
+### 2. 响应式设计
+
+- **移动优先**: 基于Tailwind CSS的响应式断点
+- **弹性布局**: Flexbox和Grid布局结合
+- **自适应字体**: 基于视口单位的字体缩放
+
+### 3. 暗色主题支持
+
+- **CSS类切换**: `.dark`类名控制
+- **颜色变量**: HSL颜色空间便于主题切换
+- **渐变过渡**: 主题切换动画效果
+
+## 主题配置系统
+
+### 1. 主题元数据 (`theme.yaml`)
+
+```yaml
+apiVersion: theme.halo.run/v1alpha1
+kind: Theme
+metadata:
+  name: halo-theme-vapor
+spec:
+  displayName: Vapor-Gridfriend
+  version: "1.0.9"
+  requires: ">=2.0.0"
+  settingName: "theme-vapor-setting"
+  configMapName: "theme-vapor-setting-configMap"
+```
+
+### 2. 设置表单 (`settings.yaml`)
+
+**主要配置项**:
+- **首页设置**: 头像、介绍词、推荐文章数量
+- **样式设置**: 配色方案、文案配置
+- **社交链接**: 多平台链接配置
+- **功能开关**: 统计显示、评论系统等
+
+### 3. 配置数据流
+
+```
+settings.yaml → Halo后台 → 主题配置API → 模板变量 → 页面渲染
+```
+
+## 模板引擎集成
+
+### 1. Thymeleaf模板语法
+
+**变量访问**:
+```html
+<!-- 站点信息 -->
+<title th:text="${site.title}"></title>
+
+<!-- 主题配置 -->
+<img th:src="${theme.config.layout.home_avatar}" />
+
+<!-- 文章数据 -->
+<h1 th:text="${post.spec.title}"></h1>
+```
+
+**条件渲染**:
+```html
+<div th:if="${theme.config.footer.show_stats}">
+  <!-- 统计信息 -->
+</div>
+```
+
+**循环渲染**:
+```html
+<div th:each="post : ${posts.items}">
+  <!-- 文章列表项 -->
+</div>
+```
+
+### 2. 数据绑定
+
+**Halo API数据**:
+- `site.*`: 站点基础信息
+- `theme.config.*`: 主题配置数据
+- `post.*`: 文章详情数据
+- `posts.*`: 文章列表数据
+- `categories.*`: 分类数据
+- `tags.*`: 标签数据
+
+## 性能优化策略
+
+### 1. 构建优化
+
+- **代码分割**: Vite自动代码分割
+- **Tree Shaking**: 移除未使用代码
+- **压缩优化**: Terser压缩JavaScript
+- **Gzip压缩**: vite-plugin-compression
+
+### 2. 资源优化
+
+- **图片懒加载**: Intersection Observer API
+- **字体优化**: 字体子集化和预加载
+- **CSS优化**: PurgeCSS移除未使用样式
+- **缓存策略**: 静态资源版本控制
+
+### 3. 运行时优化
+
+- **虚拟滚动**: 长列表性能优化
+- **防抖节流**: 搜索和滚动事件优化
+- **内存管理**: 事件监听器清理
+
+## 兼容性支持
+
+### 1. 浏览器兼容性
+
+- **现代浏览器**: Chrome 88+, Firefox 85+, Safari 14+
+- **移动端**: iOS Safari 14+, Chrome Mobile 88+
+- **渐进增强**: 核心功能在旧浏览器中可用
+
+### 2. Halo版本兼容
+
+- **最低版本**: Halo 2.0.0
+- **API兼容**: 基于Halo标准API
+- **插件集成**: 支持常用Halo插件
+
+## 开发规范
+
+### 1. 代码规范
+
+- **TypeScript**: 严格类型检查
+- **ESLint**: 代码质量检查
+- **Prettier**: 代码格式化
+- **命名规范**: camelCase for JS, kebab-case for CSS
+
+### 2. 提交规范
+
+- **Conventional Commits**: 标准化提交信息
+- **Husky**: Git hooks自动化
+- **lint-staged**: 提交前代码检查
+
+### 3. 文档规范
+
+- **JSDoc**: 函数级注释
+- **README**: 使用说明文档
+- **CHANGELOG**: 版本变更记录
+
+## 部署与维护
+
+### 1. 部署流程
+
+1. 执行构建命令生成生产版本
+2. 通过Halo后台上传主题包
+3. 在主题设置中配置相关参数
+4. 启用主题并测试功能
+
+### 2. 维护策略
+
+- **版本管理**: 语义化版本控制
+- **问题跟踪**: GitHub Issues
+- **更新机制**: 通过Halo应用市场更新
+
+### 3. 监控与调试
+
+- **错误监控**: 浏览器控制台错误收集
+- **性能监控**: Core Web Vitals指标
+- **用户反馈**: 社区反馈收集
+
+## 扩展开发指南
+
+### 1. 添加新功能模块
+
+1. 在`src/functions/`创建新目录
+2. 实现功能逻辑并导出
+3. 在`src/main.ts`中引入
+4. 更新相关模板文件
+
+### 2. 自定义样式
+
+1. 修改CSS变量定义
+2. 扩展Tailwind配置
+3. 添加Less样式文件
+4. 重新构建主题
+
+### 3. 集成第三方插件
+
+1. 安装相关依赖包
+2. 创建插件适配器
+3. 添加模板支持
+4. 更新设置配置
+
+---
+
+**文档版本**: 1.0  
+**最后更新**: 2025-01-18  
+**维护者**: SCOTT Studio

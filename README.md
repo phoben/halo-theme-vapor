@@ -1,5 +1,5 @@
 <div align="center">
-    <h1 align="center">Halo Theme Vapor</h1>
+    <h1 align="center">Halo Theme Vapor-Gridfriend</h1>
     <p align="center" style="text-align: center;">
         <a href="https://www.halo.run/store/apps/app-ot0zaok6?tab=readme"><img alt="Halo App Store" src="https://img.shields.io/badge/Halo-%E5%BA%94%E7%94%A8%E5%B8%82%E5%9C%BA-%230A81F5?style=flat-square&logo=appstore&logoColor=%23fff" /></a>
         <a href="https://github.com/iscottt/halo-theme-vapor/releases"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/iscottt/halo-theme-vapor?style=flat-square&logo=github" /></a>
@@ -12,7 +12,7 @@
 </div>
 
 ## 🎊 声明
-Vapor是一个简约风格的博客主题
+Vapor-Gridfriend是一个简约风格的博客主题
 - 主题移植于： <a href="https://cali.so">Cali 的个人博客网站</a>
 - 代码仓库：[Cali 的Github](https://github.com/CaliCastle/cali.so)
 
@@ -50,5 +50,12 @@ Vapor是一个简约风格的博客主题
 
 ## 💰 赞助
 
-**如果 Halo-theme-vapor 主题对你有帮助，欢迎赞助相关开发者**
+**如果 Halo-theme-vapor-gridfriend 主题对你有帮助，欢迎赞助相关开发者**
 - 三禾木木 [爱发电赞助](https://afdian.com/a/scottstudio)
+
+## 📝 更新日志
+
+### v1.0.9-gridfriend
+- 🎨 主题更名：将原 "Vapor" 主题更名为 "Vapor-Gridfriend"
+- 📝 更新所有配置文件中的主题名称和描述信息
+- 🔧 保持原有功能和样式不变，仅进行名称区分
