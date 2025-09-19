@@ -1,4 +1,4 @@
-<article class="fade-before" th:fragment="post-card(post)">
+<article class="fade-before" th:fragment="video-card(post)">
   <a
     class="post-card group relative z-[1] flex h-full w-full transform-cpu flex-col rounded-3xl bg-transparent ring-2 ring-[--post-image-bg] transition-transform hover:-translate-y-1"
     th:href="@{${post.status.permalink}}"
@@ -11,7 +11,7 @@
         loading="lazy"
         decoding="async"
         data-nimg="fill"
-        class="post-card-cover load rounded-t-3xl object-cover"
+        class="post-card-cover load rounded-3xl object-cover"
         th:src="${post.spec.cover}"
         th:srcset="|${thumbnail.gen(post.spec.cover, 's')} 400w,
                   ${thumbnail.gen(post.spec.cover, 'm')} 800w,

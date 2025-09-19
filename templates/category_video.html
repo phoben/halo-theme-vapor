@@ -25,7 +25,7 @@
 
               <ul class="mx-auto mt-12 grid max-w-7xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
                 <li th:each="post : ${posts.items}">
-                  <th:block th:replace="~{modules/post-card :: post-card(post = ${post})}"></th:block>
+                  <th:block th:replace="~{modules/video-card :: video-card(post = ${post})}"></th:block>
                 </li>
               </ul>
 

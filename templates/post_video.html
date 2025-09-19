@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(content = ~{::content},page_js = ~{::page_js},_title = ${post.spec.title},_head = ~{::head})}"
+>
+  <th:block th:fragment="page_js">
+    <script
+      type="text/javascript"
+      th:src="@{/assets/js/highlight.min.js?v={version}(version=${theme.spec.version})}"
+      id="highlight-js"
+    ></script>
+  </th:block>
+  <th:block th:fragment="content">
+    <div class="relative z-[2] mt-32 sm:px-8 lg:mt-48">
+      <div class="mx-auto max-w-7xl lg:px-8">
+        <div class="relative px-4 md:px-8">
+          <div class="w-full md:flex md:justify-center xl:relative">
+            <aside class="hidden w-[90px] shrink-0 lg:block">
+              <div class="sticky top-2 flex pt-20">
+                <div
+                  class="pointer-events-auto flex w-12 flex-col items-center justify-center gap-8 rounded-3xl bg-gradient-to-b from-zinc-100/80 to-white/90 px-1 py-4 text-zinc-800 ring-1 ring-zinc-400/10 backdrop-blur-lg dark:from-zinc-800/80 dark:to-zinc-950/80 dark:text-zinc-400 dark:ring-zinc-500/10"
+                >
+                  <upvote-button
+                    th:name="${post.metadata.name}"
+                    kind="Post"
+                    group="content.halo.run"
+                    th:current-upvote-count="${post.stats.upvote}"
+                  ></upvote-button>
+                  <button
+                    type="button"
+                    class="relative flex aspect-square h-8 items-center justify-center"
+                    tabindex="0"
+                    id="go-comment"
+                    style="height: 24px"
+                  >
+                    <i class="iconfont icon-messages-3"></i>
+                    <span
+                      class="format-num absolute -bottom-6 left-0 flex w-full items-center justify-center whitespace-nowrap text-[12px] font-semibold text-zinc-700/30 dark:text-zinc-200/25"
+                      th:data-num="${post.stats.comment}"
+                    >
+                    </span>
+                  </button>
+                  <button
+                    id="share-btn"
+                    type="button"
+                    class="relative aspect-square h-8"
+                    tabindex="0"
+                    style="height: 24px"
+                  >
+                    <i class="iconfont icon-zhuanfa"></i>
+                    <script>
+                      const shareButton = document.querySelector("#share-btn");
+                      if (navigator.share) {
+                        shareButton.addEventListener("click", () => {
+                          const authorName = "[(${post.owner.displayName})]";
+                          const siteName = "[(${site.title})]";
+                          const postTitle = "[(${post.spec.title})]";
+                          const postUrl = "[(${post.status.permalink})]";
+                          const shareData = {
+                            title: `分享「${authorName}」发表在${siteName}的文章「${postTitle}」`,
+                            url: postUrl,
+                            text: `${postTitle} - ${siteName}`,
+                          };
+
+                          navigator
+                            .share(shareData)
+                            .then(() => console.log("分享成功"))
+                            .catch((error) => console.log("分享失败:", error));
+                        });
+                      } else {
+                        shareButton.remove();
+                      }
+                    </script>
+                  </button>
+                </div>
+              </div>
+            </aside>
+            <a
+              class="fade-before group group mb-8 flex h-10 w-10 items-center justify-center gap-2 rounded-full bg-white bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 py-2 text-sm shadow-md shadow-zinc-800/5 outline-offset-2 ring-1 ring-zinc-900/5 backdrop-blur transition active:transition-none lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20"
+              aria-label="返回博客页面"
+              href="/"
+            >
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-500 dark:group-hover:stroke-zinc-400"
+              >
+                <path
+                  d="M8.03089 4C6.57669 5.05865 5.2706 6.29537 4.14485 7.67887C4.04828 7.79755 4 7.94044 4 8.08333M8.03089 12.1667C6.57669 11.108 5.2706 9.8713 4.14485 8.4878C4.04828 8.36912 4 8.22623 4 8.08333M4 8.08333H14.963C17.7448 8.08333 20 10.3033 20 13.0417C20 15.7801 17.7448 18 14.963 18H12"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </a>
+            <!-- 视频模板：主内容区域撑满，去除右侧目录 -->
+            <main class="max-w-full before:mr-1 md:flex-1 md:shrink-0">
+              <header
+                class="fade-before relative flex flex-col items-center pb-5 after:absolute after:-bottom-1 after:block after:h-px after:w-full after:rounded after:bg-gradient-to-r after:from-zinc-400/20 after:via-zinc-200/10 after:to-transparent dark:after:from-zinc-600/20 dark:after:via-zinc-700/10"
+              >
+                <!-- 视频模板：去除封面图片展示区域 -->
+                <div
+                  class="flex w-full items-center space-x-4 text-sm font-medium text-zinc-600/80 dark:text-zinc-400/80"
+                >
+                  <time th:datetime="${post.spec.publishTime}" class="flex items-center space-x-1">
+                    <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M8 2V4.12777M8 6V4.12777M16 2V4.12777M16 6V4.12777M20.9597 10C21 10.7878 21 11.7554 21 13C21 15.7956 21 17.1935 20.5433 18.2961C19.9343 19.7663 18.7663 20.9343 17.2961 21.5433C16.1935 22 14.7956 22 12 22C9.20435 22 7.80653 22 6.7039 21.5433C5.23373 20.9343 4.06569 19.7663 3.45672 18.2961C3 17.1935 3 15.7956 3 13C3 11.7554 3 10.7878 3.0403 10M20.9597 10C20.9095 9.01824 20.7967 8.31564 20.5433 7.7039C19.9343 6.23373 18.7663 5.06569 17.2961 4.45672C16.9146 4.29871 16.4978 4.19536 16 4.12777M20.9597 10L3.0403 10M3.0403 10C3.09052 9.01824 3.20333 8.31564 3.45672 7.7039C4.06569 6.23373 5.23373 5.06569 6.7039 4.45672C7.08538 4.29871 7.50219 4.19536 8 4.12777M8 4.12777C8.94106 4 10.1716 4 12 4C13.8284 4 15.0589 4 16 4.12777"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                    <span th:text="${#dates.format(post.spec.publishTime,'yyyy/MM/dd')}"></span>
+                  </time>
+                  <a
+                    th:href="@{${post.categories[0].status.permalink}}"
+                    th:if="${#lists.size(post.categories) gt 0}"
+                    class="inline-flex items-center transition-colors hover:text-lime-500 hover:underline"
+                  >
+                    <i class="iconfont icon-cate text-sm"></i>&nbsp;
+                    <span th:text="${post.categories[0].spec.displayName}"></span>
+                  </a>
+                  <a
+                    th:href="@{${post.tags[0].status.permalink}}"
+                    th:if="${#lists.size(post.tags) gt 0}"
+                    class="inline-flex items-center transition-colors hover:text-lime-500 hover:underline"
+                  >
+                    <i class="iconfont icon-huati text-sm"></i>&nbsp;
+                    <span th:text="${post.tags[0].spec.displayName}"></span>
+                  </a>
+                </div>
+                <h1 class="font-slogan mt-6 w-full text-4xl font-bold text-zinc-800 sm:text-5xl dark:text-zinc-100">
+                  <span
+                    style="display: inline-block; vertical-align: top; text-decoration: inherit; text-wrap: balance"
+                    th:text="${post.spec.title}"
+                  ></span>
+                </h1>
+                <p
+                  th:if="${not #strings.isEmpty(post.spec.excerpt.raw)}"
+                  class="mt-5 w-full text-sm font-medium text-zinc-500"
+                  th:text="${post.spec.excerpt.raw}"
+                ></p>
+                <div
+                  class="mt-5 flex w-full items-center space-x-4 text-sm font-medium text-zinc-700/50 dark:text-zinc-300/50"
+                >
+                  <span class="inline-flex items-center space-x-1.5" th:title="${post.stats.upvote}">
+                    <i class="iconfont icon-views1 text-sm"></i>
+                    <div><span class="format-num" th:data-num="${post.stats.visit}"></span>&nbsp;次点击</div>
+                  </span>
+                  <span
+                    th:with="wordCount = ${#strings.length(post.content.content)}"
+                    class="inline-flex items-center space-x-1.5"
+                    v-if="post.post_type === 'article'"
+                  >
+                    <i class="iconfont icon-time1 text-sm"></i>
+                    <span class="reading-time">[[${wordCount / 400}]] 分钟阅读</span>
+                  </span>
+                </div>
+              </header>
+              <article
+                th:utext="${post.content.content}"
+                class="prose relative mt-8 grid-cols-7 dark:prose-invert"
+                id="content"
+              ></article>
+              <div
+                class="my-12 border-t border-zinc-200 pt-5 text-center text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400"
+              >
+                © 本文著作权归作者所有，未经许可不得转载使用。
+              </div>
+
+              <th:block th:if="${post.spec.allowComment}">
+                <th:block
+                  th:replace="~{modules/widgets/comment :: page(${post.metadata.name},'Post','content.halo.run')}"
+                ></th:block>
+              </th:block>
+            </main>
+            <!-- 视频模板：完全去除右侧目录区域 -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </th:block>
+
+  <th:block th:fragment="page_js">
+    <th:block th:replace="~{modules/widgets/fancy}"></th:block>
+    <script th:src="@{/assets/js/marked.umd.js?v={version}(version='1.2.2')}"></script>
+  </th:block>
+</html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // 视频模板：去除目录生成功能
+    main.prettifyContainer(".format-num");
+    main.replaceLinksInElement(document.getElementById("content"));
+    main.replaceLinksInElement(document.getElementById("comments"));
+    const goCommentBtn = document.getElementById("go-comment");
+    goCommentBtn.addEventListener("click", () => {
+      const respond = document.getElementById("respond");
+      respond.scrollIntoView();
+    });
+    /**
+     * 给img增加一些装饰
+     */
+    document.querySelectorAll(".prose p>img").forEach((el) => {
+      if (!el.getAttribute("data-fancybox")) {
+        const classes = el.class;
+        el.setAttribute(
+          "class",
+          "relative z-20 dark:brightness-75 dark:transition-[filter] rounded-xl dark:hover:brightness-100 rounded-xl" +
+            classes
+        );
+        el.parentNode.setAttribute("class", "rounded-2xl bg-zinc-100 p-2 dark:bg-zinc-800");
+        el.setAttribute("data-fancybox", "images");
+        const altText = el.getAttribute("alt");
+        if (!altText) return;
+        const span = document.createElement("span");
+        span.innerText = altText;
+        span.setAttribute(
+          "class",
+          "flex w-full mt-1.5 items-center justify-center text-center text-sm font-medium text-zinc-500 dark:text-zinc-400"
+        );
+        el.parentNode.appendChild(span);
+      }
+    });
+  });
+  // 视频模板：去除滚动进度功能，因为没有目录
+</script>

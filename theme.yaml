@@ -19,3 +19,30 @@ spec:
   license:
     - name: "Apache License 2.0"
       url: "https://github.com/iscottt/halo-theme-vapor/blob/main/LICENSE"
+  customTemplates:
+    post:
+      - name: 视频
+        description: 适合视频内容的文章模板，去除封面图片和目录，内容区域更宽
+        screenshot:
+        file: post_video.html
+    category:
+      - name: 视频
+        description: 视频封面类展示模板
+        screenshot:
+        file: category_video.html
+      - name: 案例
+        description: 案例展示风格模板
+        screenshot:
+        file: category_case.html
+      - name: 笔记
+        description: 笔记风格展示模板
+        screenshot:
+        file: category_notes.html
+      - name: 资源
+        description: 资源下载展示模板
+        screenshot:
+        file: category_resources.html
+      - name: 列表
+        description: 目录列表展示模板
+        screenshot:
+        file: category_list.html

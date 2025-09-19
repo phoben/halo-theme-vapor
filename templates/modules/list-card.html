@@ -1,0 +1,20 @@
+<article class="fade-before" th:fragment="list-card(post)">
+  <a
+    class="list-card group relative z-[1] flex w-full items-center gap-2 px-2 py-2 transition-all duration-200 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
+    th:href="@{${post.status.permalink}}"
+    th:title="${post.spec.title}"
+  >
+    <h2
+      class="min-w-0 flex-shrink-0 text-sm font-medium text-zinc-900 transition-colors group-hover:text-[--vapor--color-primary] md:text-base dark:text-zinc-100"
+      th:text="${post.spec.title}"
+    ></h2>
+    <span
+      class="list-card-divider flex-1 border-b border-dotted border-zinc-300 opacity-50 dark:border-zinc-600"
+    ></span>
+    <time
+      class="list-card-date flex-shrink-0 whitespace-nowrap text-xs font-normal text-zinc-500 transition-colors group-hover:text-zinc-700 md:text-sm dark:text-zinc-400 dark:group-hover:text-zinc-200"
+      th:datetime="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}"
+      th:text="${#dates.format(post.spec.publishTime,'yyyy-MM-dd')}"
+    ></time>
+  </a>
+</article>
