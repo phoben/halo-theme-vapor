@@ -1,4 +1,4 @@
-import { LitElement } from 'lit';
+import { LitElement } from "lit";
 
 /**
  * tailwind css 注入
@@ -11,6 +11,6 @@ export declare function TW<T extends LitMixin>(superClass: T): T;
  */
 export declare const CustomLitElement: typeof LitElement;
 declare global {
-    export type LitMixin<T = unknown> = new (...args: any[]) => T & LitElement;
+  export type LitMixin<T = unknown> = new (...args: any[]) => T & LitElement;
 }
 //# sourceMappingURL=custom-lit-element.d.ts.map

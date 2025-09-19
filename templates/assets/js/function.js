@@ -275,15 +275,15 @@ VAPORCopyButton("pre code", "复制代码");
 VAPORCopyButton("#copy em", null);
 animateDelayed(".page-aside", "li", 0, 0.1);
 
-function postMarkHighlight(){
-  document.querySelectorAll('mark[data-color]').forEach(el => {
-    el.style.setProperty('--custom-color', el.dataset.color);
+function postMarkHighlight() {
+  document.querySelectorAll("mark[data-color]").forEach((el) => {
+    el.style.setProperty("--custom-color", el.dataset.color);
   });
 }
 
-function postTableHighlight(){
-  document.querySelectorAll('.prose table').forEach(el => {
-    el.parentNode.setAttribute('class','wp-block-table')
+function postTableHighlight() {
+  document.querySelectorAll(".prose table").forEach((el) => {
+    el.parentNode.setAttribute("class", "wp-block-table");
   });
 }
 
@@ -291,8 +291,8 @@ document.addEventListener("DOMContentLoaded", () => {
   VAPORThemesSwitcher();
   VAPORLazysLoad("img", "loaded");
   postCodeHighlight();
-  postMarkHighlight()
-  postTableHighlight()
+  postMarkHighlight();
+  postTableHighlight();
   postGalleryCarousel(".wp-block-gallery", ".wp-block-image");
   FadeAnimate();
   VAPORHeadFixed();

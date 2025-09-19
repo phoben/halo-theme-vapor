@@ -5,12 +5,18 @@
     "build-only": "tsc && vite build",
     "dev": "vite build --watch",
     "lint": "eslint ./src --ext .js,.cjs,.mjs,.ts,.cts,.mts --ignore-path .gitignore",
+    "lint:fix": "eslint ./src --ext .js,.cjs,.mjs,.ts,.cts,.mts --ignore-path .gitignore --fix",
+    "format": "prettier --write \"./**/*.{ts,js,json,yaml,yml,html}\" --ignore-unknown",
+    "format:check": "prettier --check \"./**/*.{ts,js,json,yaml,yml,html}\" --ignore-unknown",
     "prepare": "husky",
-    "prettier": "prettier --write './**/*.{ts,json,yaml,yml,html}'"
+    "precommit": "lint-staged"
   },
   "lint-staged": {
     "*.{ts,json,yaml,yml,html}": [
-      "prettier --write"
+      "prettier --write --ignore-unknown"
+    ],
+    "*.{js,cjs,mjs}": [
+      "prettier --write --ignore-unknown"
     ]
   },
   "dependencies": {
