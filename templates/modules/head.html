@@ -55,6 +55,9 @@
   />
   <link rel="stylesheet" th:href="@{/assets/dist/style.css?v={version}(version=${theme.spec.version})}" />
 
+  <!-- Iconify Script for Icon Support -->
+  <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+
   <th:block th:if="${_head != null}">
     <th:block th:replace="${_head}" />
   </th:block>
