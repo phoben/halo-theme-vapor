@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>链接处理功能测试</title>
+    <script src="templates/assets/dist/main.iife.js"></script>
+    <link rel="stylesheet" href="templates/assets/dist/style.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #e1e5e9;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .test-links {
+            margin: 15px 0;
+        }
+        .test-links p {
+            margin: 10px 0;
+        }
+        .original-links {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .processed-links {
+            background: #d1ecf1;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>链接处理功能测试页面</h1>
+    <p>此页面用于测试优化后的链接处理功能，包括不同协议的图标显示。</p>
+
+    <div class="test-section">
+        <h3>HTTP/HTTPS 链接测试</h3>
+        <div class="original-links">
+            <strong>原始链接：</strong>
+            <div class="test-links" id="http-links">
+                <p>访问 <a href="https://www.google.com">Google</a> 搜索引擎</p>
+                <p>查看 <a href="https://github.com">GitHub</a> 代码仓库</p>
+                <p>浏览 <a href="http://example.com">Example</a> 示例网站</p>
+            </div>
+        </div>
+        <div class="processed-links">
+            <strong>处理后链接：</strong>
+            <div class="test-links" id="http-links-processed"></div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>邮箱链接测试</h3>
+        <div class="original-links">
+            <strong>原始链接：</strong>
+            <div class="test-links" id="email-links">
+                <p>联系我们：<a href="mailto:contact@example.com">contact@example.com</a></p>
+                <p>技术支持：<a href="mailto:support@example.com?subject=技术咨询">support@example.com</a></p>
+            </div>
+        </div>
+        <div class="processed-links">
+            <strong>处理后链接：</strong>
+            <div class="test-links" id="email-links-processed"></div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>电话链接测试</h3>
+        <div class="original-links">
+            <strong>原始链接：</strong>
+            <div class="test-links" id="tel-links">
+                <p>客服热线：<a href="tel:+86-400-123-4567">400-123-4567</a></p>
+                <p>紧急联系：<a href="tel:+1-555-0123">+1-555-0123</a></p>
+            </div>
+        </div>
+        <div class="processed-links">
+            <strong>处理后链接：</strong>
+            <div class="test-links" id="tel-links-processed"></div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>其他协议链接测试</h3>
+        <div class="original-links">
+            <strong>原始链接：</strong>
+            <div class="test-links" id="other-links">
+                <p>FTP 文件：<a href="ftp://files.example.com/document.pdf">document.pdf</a></p>
+                <p>文件协议：<a href="file:///C:/Users/Documents/readme.txt">本地文件</a></p>
+                <p>自定义协议：<a href="myapp://open?page=home">打开应用</a></p>
+            </div>
+        </div>
+        <div class="processed-links">
+            <strong>处理后链接：</strong>
+            <div class="test-links" id="other-links-processed"></div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>跳过处理的链接测试</h3>
+        <div class="original-links">
+            <strong>原始链接（带 dont-replace 类）：</strong>
+            <div class="test-links" id="skip-links">
+                <p>不处理的链接：<a href="https://www.example.com" class="dont-replace">Example (不处理)</a></p>
+                <p>普通链接：<a href="https://www.example.com">Example (正常处理)</a></p>
+            </div>
+        </div>
+        <div class="processed-links">
+            <strong>处理后链接：</strong>
+            <div class="test-links" id="skip-links-processed"></div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 30px 0;">
+        <button onclick="processAllLinks()">处理所有链接</button>
+        <button onclick="resetAllLinks()">重置所有链接</button>
+    </div>
+
+    <script>
+        // 存储原始HTML内容
+        const originalContents = {};
+        
+        function saveOriginalContent() {
+            const sections = ['http-links', 'email-links', 'tel-links', 'other-links', 'skip-links'];
+            sections.forEach(id => {
+                originalContents[id] = document.getElementById(id).innerHTML;
+            });
+        }
+
+        function processAllLinks() {
+            const sections = [
+                { original: 'http-links', processed: 'http-links-processed' },
+                { original: 'email-links', processed: 'email-links-processed' },
+                { original: 'tel-links', processed: 'tel-links-processed' },
+                { original: 'other-links', processed: 'other-links-processed' },
+                { original: 'skip-links', processed: 'skip-links-processed' }
+            ];
+
+            sections.forEach(section => {
+                const originalElement = document.getElementById(section.original);
+                const processedElement = document.getElementById(section.processed);
+                
+                // 复制原始内容到处理区域
+                processedElement.innerHTML = originalElement.innerHTML;
+                
+                // 处理链接
+                if (window.replaceLinksInElement) {
+                    window.replaceLinksInElement(processedElement);
+                } else {
+                    processedElement.innerHTML = '<p style="color: red;">链接处理函数未加载，请检查 main.iife.js 文件</p>';
+                }
+            });
+        }
+
+        function resetAllLinks() {
+            const processedSections = ['http-links-processed', 'email-links-processed', 'tel-links-processed', 'other-links-processed', 'skip-links-processed'];
+            processedSections.forEach(id => {
+                document.getElementById(id).innerHTML = '';
+            });
+        }
+
+        // 页面加载时保存原始内容
+        document.addEventListener('DOMContentLoaded', function() {
+            saveOriginalContent();
+            
+            // 检查函数是否可用
+            setTimeout(() => {
+                if (window.replaceLinksInElement) {
+                    console.log('✅ replaceLinksInElement 函数已加载');
+                } else {
+                    console.error('❌ replaceLinksInElement 函数未找到');
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

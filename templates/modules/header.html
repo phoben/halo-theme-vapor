@@ -173,16 +173,15 @@
       </button>
 
       <th:block th:if="${roleName == 'super-role'}">
-        <button
-          type="button"
+        <a
           href="/console"
           target="_blank"
           th:data-tooltip="去后台"
           aria-label="去后台"
-          class="group rounded-full bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 py-2 leading-[1] shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+          class="group rounded-full bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 py-2 leading-[1] shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20 inline-flex items-center justify-center"
         >
           <i class="iconfont icon-setting h-[16px] w-[16px]"></i>
-        </button>
+        </a>
       </th:block>
     </div>
   </div>

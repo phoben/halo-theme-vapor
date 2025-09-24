@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{modules/layout :: html(content = ~{::content},page_js = ~{::page_js},_title = '新闻咨询',_head = ~{::head})}"
+>
+  <th:block th:fragment="head">
+    <meta name="description" content="新闻咨询 - 最新资讯动态" />
+    <meta name="keywords" content="新闻,咨询,资讯,动态" />
+  </th:block>
+
+  <th:block th:fragment="content">
+    <div class="relative z-[2] mt-32 sm:px-8 lg:mt-48">
+      <div class="mx-auto max-w-7xl lg:px-8">
+        <div class="relative px-4 md:px-8">
+          <div class="w-full">
+            <!-- 返回按钮 -->
+            <a
+              class="fade-before group mb-8 flex h-10 w-10 items-center justify-center gap-2 rounded-full bg-white bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 py-2 text-sm shadow-md shadow-zinc-800/5 outline-offset-2 ring-1 ring-zinc-900/5 backdrop-blur transition active:transition-none dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20"
+              aria-label="返回首页"
+              href="/"
+            >
+              <svg
+                width="1em"
+                height="1em"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-500 dark:group-hover:stroke-zinc-400"
+              >
+                <path
+                  d="M8.03089 4C6.57669 5.05865 5.2706 6.29537 4.14485 7.67887C4.04828 7.79755 4 7.94044 4 8.08333M8.03089 12.1667C6.57669 11.108 5.2706 9.8713 4.14485 8.4878C4.04828 8.36912 4 8.22623 4 8.08333M4 8.08333H14.963C17.7448 8.08333 20 10.3033 20 13.0417C20 15.7801 17.7448 18 14.963 18H12"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </a>
+
+            <!-- 页面标题 -->
+            <header class="fade-before mb-12">
+              <h1 class="font-slogan text-4xl font-bold text-zinc-800 sm:text-5xl dark:text-zinc-100">
+                新闻咨询
+              </h1>
+              <p class="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
+                最新资讯动态，了解行业前沿信息
+              </p>
+            </header>
+
+            <!-- 新闻列表 -->
+            <main class="fade-before">
+              <th:block th:with="friends = ${friendFinder.list(param.page != null ? param.page : 1, 10)}">
+                <div class="space-y-8" th:if="${friends != null and #lists.size(friends.items) > 0}">
+                  <article
+                    th:each="friend : ${friends.items}"
+                    th:with="spec = ${friend.spec}"
+                    class="group relative rounded-2xl bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 transition-all duration-200 hover:shadow-md hover:ring-zinc-900/10 dark:bg-zinc-800/50 dark:ring-zinc-700/50 dark:hover:bg-zinc-800/80 dark:hover:ring-zinc-600/50 border-b border-zinc-100 dark:border-zinc-700/50 pb-6 last:border-b-0"
+                  >
+                  <!-- 新闻卡片内容 -->
+                  <div class="flex flex-col space-y-4 md:flex-row md:space-x-6 md:space-y-0">
+                    <!-- 作者头像 -->
+                    <div class="flex-shrink-0">
+                      <div class="relative h-12 w-12 overflow-hidden rounded-full ring-2 ring-zinc-200 dark:ring-zinc-700">
+                        <img
+                          th:src="${spec.logo}"
+                          th:alt="${spec.author}"
+                          class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-105"
+                          loading="lazy"
+                          onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0yNCAyNEMyNy4zMTM3IDI0IDMwIDIxLjMxMzcgMzAgMThDMzAgMTQuNjg2MyAyNy4zMTM3IDEyIDI0IDEyQzIwLjY4NjMgMTIgMTggMTQuNjg2MyAxOCAxOEMxOCAyMS4zMTM3IDIwLjY4NjMgMjQgMjQgMjRaIiBmaWxsPSIjOUNBM0FGIi8+CjxwYXRoIGQ9Ik0xMiAzNkMxMiAzMC4yMDEgMTcuMzcyNSAyNS41IDI0IDI1LjVDMzAuNjI3NSAyNS41IDM2IDMwLjIwMSAzNiAzNiIgZmlsbD0iIzlDQTNBRiIvPgo8L3N2Zz4K'"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- 新闻内容 -->
+                    <div class="flex-1 min-w-0">
+                      <!-- 标题和作者信息 -->
+                      <div class="mb-3">
+                        <h2 class="mb-2">
+                          <a
+                            th:href="${spec.postLink}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-xl font-semibold text-zinc-900 transition-colors duration-200 hover:text-lime-600 dark:text-zinc-100 dark:hover:text-lime-400 line-clamp-2"
+                            th:text="${spec.title}"
+                          ></a>
+                        </h2>
+                        
+                        <!-- 作者和发布时间 -->
+                        <div class="flex flex-wrap items-center gap-4 text-sm text-zinc-600 dark:text-zinc-400">
+                          <a
+                            th:href="${spec.authorUrl}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center space-x-2 transition-colors hover:text-lime-600 dark:hover:text-lime-400"
+                          >
+                            <i class="iconfont icon-user text-sm"></i>
+                            <span th:text="${spec.author}"></span>
+                          </a>
+                          
+                          <time
+                            th:datetime="${spec.pubDate}"
+                            class="inline-flex items-center space-x-1"
+                            th:if="${spec.pubDate != null}"
+                          >
+                            <i class="iconfont icon-time1 text-sm"></i>
+                            <span th:text="${#dates.format(spec.pubDate, 'yyyy/MM/dd HH:mm')}"></span>
+                          </time>
+                        </div>
+                      </div>
+
+                      <!-- 文章摘要 -->
+                      <div
+                        th:if="${not #strings.isEmpty(spec.description)}"
+                        class="text-zinc-700 dark:text-zinc-300 line-clamp-3"
+                      >
+                        <p th:text="${spec.description}"></p>
+                      </div>
+
+                      <!-- 阅读更多链接 -->
+                      <div class="mt-4">
+                        <a
+                          th:href="${spec.postLink}"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="inline-flex items-center space-x-1 text-sm font-medium text-lime-600 transition-colors hover:text-lime-700 dark:text-lime-400 dark:hover:text-lime-300"
+                        >
+                          <span>阅读全文</span>
+                          <svg
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4"
+                          >
+                            <path
+                              d="M7 17L17 7M17 7H7M17 7V17"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  </article>
+                </div>
+
+                <!-- 空状态 -->
+                <div
+                  th:if="${friends == null or #lists.size(friends.items) == 0}"
+                  class="flex flex-col items-center justify-center py-16 text-center"
+                >
+                <div class="mb-4 rounded-full bg-zinc-100 p-6 dark:bg-zinc-800">
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="text-zinc-400 dark:text-zinc-600"
+                  >
+                    <path
+                      d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M8.5 8.5C8.5 9.32843 7.82843 10 7 10C6.17157 10 5.5 9.32843 5.5 8.5C5.5 7.67157 6.17157 7 7 7C7.82843 7 8.5 7.67157 8.5 8.5Z"
+                      fill="currentColor"
+                    />
+                    <path d="M21 15L16 10L5 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <h3 class="mb-2 text-lg font-semibold text-zinc-900 dark:text-zinc-100">暂无新闻资讯</h3>
+                <p class="text-zinc-600 dark:text-zinc-400">目前还没有可显示的新闻内容，请稍后再来查看。</p>
+                </div>
+
+                <!-- 分页导航 -->
+                <nav
+                  th:if="${friends != null and friends.totalPages > 1}"
+                  class="mt-12 flex items-center justify-between border-t border-zinc-200 pt-8 dark:border-zinc-700"
+                >
+                <!-- 移动端分页 -->
+                <div class="flex flex-1 justify-between sm:hidden">
+                  <a
+                    th:if="${friends.hasPrevious()}"
+                    th:href="@{/friends(page=${friends.page - 1})}"
+                    class="relative inline-flex items-center rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition-all duration-200 hover:bg-zinc-50 hover:text-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 dark:hover:text-lime-400 dark:focus:ring-lime-400"
+                  >
+                    <svg class="mr-2 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                    </svg>
+                    上一页
+                  </a>
+                  
+                  <!-- 页码信息 -->
+                  <div class="flex items-center space-x-2">
+                    <span class="text-sm text-zinc-600 dark:text-zinc-400">
+                      第 <span class="font-semibold text-lime-600 dark:text-lime-400" th:text="${friends.page}"></span> 页
+                    </span>
+                    <span class="text-zinc-400 dark:text-zinc-500">/</span>
+                    <span class="text-sm text-zinc-600 dark:text-zinc-400">
+                      共 <span class="font-semibold text-lime-600 dark:text-lime-400" th:text="${friends.totalPages}"></span> 页
+                    </span>
+                  </div>
+                  
+                  <a
+                    th:if="${friends.hasNext()}"
+                    th:href="@{/friends(page=${friends.page + 1})}"
+                    class="relative ml-3 inline-flex items-center rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-medium text-zinc-700 transition-all duration-200 hover:bg-zinc-50 hover:text-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 dark:hover:text-lime-400 dark:focus:ring-lime-400"
+                  >
+                    下一页
+                    <svg class="ml-2 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                    </svg>
+                  </a>
+                </div>
+                
+                <!-- 桌面端分页 -->
+                <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                  <div class="flex items-center space-x-2">
+                    <p class="text-sm text-zinc-700 dark:text-zinc-300">
+                      显示第
+                      <span class="font-semibold text-lime-600 dark:text-lime-400" th:text="${(friends.page - 1) * friends.size + 1}"></span>
+                      到
+                      <span class="font-semibold text-lime-600 dark:text-lime-400" th:text="${friends.page * friends.size > friends.total ? friends.total : friends.page * friends.size}"></span>
+                      条，共
+                      <span class="font-semibold text-lime-600 dark:text-lime-400" th:text="${friends.total}"></span>
+                      条记录
+                    </p>
+                  </div>
+                  <div>
+                    <nav class="isolate inline-flex -space-x-px rounded-lg shadow-sm" aria-label="分页">
+                      <!-- 上一页按钮 -->
+                      <a
+                        th:if="${friends.hasPrevious()}"
+                        th:href="@{/friends(page=${friends.page - 1})}"
+                        class="relative inline-flex items-center rounded-l-lg px-3 py-2 text-zinc-400 ring-1 ring-inset ring-zinc-300 transition-all duration-200 hover:bg-zinc-50 hover:text-zinc-600 focus:z-20 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 dark:ring-zinc-600 dark:hover:bg-zinc-700 dark:hover:text-zinc-300 dark:focus:ring-lime-400"
+                      >
+                        <span class="sr-only">上一页</span>
+                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                        </svg>
+                      </a>
+                      
+                      <!-- 页码按钮 -->
+                      <th:block th:with="startPage=${friends.page > 3 ? friends.page - 2 : 1}, endPage=${friends.page + 2 < friends.totalPages ? friends.page + 2 : friends.totalPages}">
+                        <!-- 第一页 -->
+                        <a th:if="${startPage > 1}"
+                           th:href="@{/friends(page=1)}"
+                           class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-zinc-900 ring-1 ring-inset ring-zinc-300 transition-all duration-200 hover:bg-zinc-50 hover:text-lime-600 focus:z-20 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 dark:text-zinc-100 dark:ring-zinc-600 dark:hover:bg-zinc-700 dark:hover:text-lime-400 dark:focus:ring-lime-400">
+                          1
+                        </a>
+                        
+                        <!-- 省略号 -->
+                        <span th:if="${startPage > 2}" class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-zinc-500 ring-1 ring-inset ring-zinc-300 dark:text-zinc-400 dark:ring-zinc-600">
+                          ...
+                        </span>
+                        
+                        <!-- 当前页附近的页码 -->
+                        <th:block th:each="pageNum : ${#numbers.sequence(startPage, endPage)}">
+                          <a th:if="${pageNum != friends.page}"
+                             th:href="@{/friends(page=${pageNum})}"
+                             th:text="${pageNum}"
+                             class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-zinc-900 ring-1 ring-inset ring-zinc-300 transition-all duration-200 hover:bg-zinc-50 hover:text-lime-600 focus:z-20 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 dark:text-zinc-100 dark:ring-zinc-600 dark:hover:bg-zinc-700 dark:hover:text-lime-400 dark:focus:ring-lime-400">
+                          </a>
+                          <span th:if="${pageNum == friends.page}"
+                                th:text="${pageNum}"
+                                class="relative z-10 inline-flex items-center bg-lime-600 px-4 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-lime-600 focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600 dark:bg-lime-500 dark:ring-lime-500">
+                          </span>
+                        </th:block>
+                        
+                        <!-- 省略号 -->
+                        <span th:if="${endPage < friends.totalPages - 1}" class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-zinc-500 ring-1 ring-inset ring-zinc-300 dark:text-zinc-400 dark:ring-zinc-600">
+                          ...
+                        </span>
+                        
+                        <!-- 最后一页 -->
+                        <a th:if="${endPage < friends.totalPages}"
+                           th:href="@{/friends(page=${friends.totalPages})}"
+                           th:text="${friends.totalPages}"
+                           class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-zinc-900 ring-1 ring-inset ring-zinc-300 transition-all duration-200 hover:bg-zinc-50 hover:text-lime-600 focus:z-20 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 dark:text-zinc-100 dark:ring-zinc-600 dark:hover:bg-zinc-700 dark:hover:text-lime-400 dark:focus:ring-lime-400">
+                        </a>
+                      </th:block>
+                      
+                      <!-- 下一页按钮 -->
+                      <a
+                        th:if="${friends.hasNext()}"
+                        th:href="@{/friends(page=${friends.page + 1})}"
+                        class="relative inline-flex items-center rounded-r-lg px-3 py-2 text-zinc-400 ring-1 ring-inset ring-zinc-300 transition-all duration-200 hover:bg-zinc-50 hover:text-zinc-600 focus:z-20 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 dark:ring-zinc-600 dark:hover:bg-zinc-700 dark:hover:text-zinc-300 dark:focus:ring-lime-400"
+                      >
+                        <span class="sr-only">下一页</span>
+                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                        </svg>
+                      </a>
+                    </nav>
+                  </div>
+                  </div>
+                </nav>
+              </th:block>
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </th:block>
+
+  <th:block th:fragment="page_js">
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // 添加淡入动画
+        const fadeElements = document.querySelectorAll('.fade-before');
+        fadeElements.forEach((el, index) => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(20px)';
+          el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          
+          setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }, index * 100);
+        });
+
+        // 文字截断处理
+        const truncateText = (element, maxLength) => {
+          const text = element.textContent;
+          if (text.length > maxLength) {
+            element.textContent = text.substring(0, maxLength) + '...';
+          }
+        };
+
+        // 处理标题截断
+        document.querySelectorAll('.line-clamp-2').forEach(el => {
+          if (el.scrollHeight > el.clientHeight) {
+            el.setAttribute('title', el.textContent);
+          }
+        });
+
+        // 处理描述截断
+        document.querySelectorAll('.line-clamp-3').forEach(el => {
+          if (el.scrollHeight > el.clientHeight) {
+            el.setAttribute('title', el.textContent);
+          }
+        });
+
+        // 图片加载错误处理
+        document.querySelectorAll('img[onerror]').forEach(img => {
+          img.addEventListener('error', function() {
+            this.style.backgroundColor = '#f3f4f6';
+            this.style.display = 'flex';
+            this.style.alignItems = 'center';
+            this.style.justifyContent = 'center';
+          });
+        });
+      });
+    </script>
+    
+    <style>
+      /* 文字截断样式 */
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      
+      .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      
+      /* 响应式调整 */
+      @media (max-width: 768px) {
+        .line-clamp-2 {
+          -webkit-line-clamp: 1;
+        }
+        
+        .line-clamp-3 {
+          -webkit-line-clamp: 2;
+        }
+      }
+      
+      /* 卡片悬停效果 */
+      .group:hover .group-hover\:scale-105 {
+        transform: scale(1.05);
+      }
+      
+      /* 链接悬停效果 */
+      a:hover {
+        text-decoration: none;
+      }
+      
+      /* 暗色模式优化 */
+      @media (prefers-color-scheme: dark) {
+        .dark\:brightness-75 {
+          filter: brightness(0.75);
+        }
+        
+        .dark\:hover\:brightness-100:hover {
+          filter: brightness(1);
+        }
+      }
+    </style>
+  </th:block>
+</html>

@@ -33,8 +33,40 @@ Vapor-Gridfriend 是一个简约风格的博客主题
 - THYUU 区块 [plugin-thyuu-embed](https://www.halo.run/store/apps/app-lKYuv)
 - 友链自助提交 [link-submit](https://www.halo.run/store/apps/app-glejqzwk)
 - 链接管理 [plugin-links](https://www.halo.run/store/apps/app-hfbQg)
+- 朋友圈插件 [plugin-friends](https://docs.kunkunyu.com/docs/plugin-friends/finder-api) - 用于新闻咨询功能
 
 > 更多插件请参见：https://github.com/halo-sigs/awesome-halo
+
+## 朋友圈插件
+
+### 插件依赖
+
+- [朋友圈插件](https://www.halo.run/store/apps/app-yISsV) - 用于获取和管理朋友圈数据
+
+### 功能特性
+
+- **新闻咨询展示**：基于朋友圈插件的 Finder API 实现新闻资讯的展示
+- **暗黑/明亮模式支持**：完美适配主题的暗黑和明亮模式切换
+- **响应式设计**：支持桌面端和移动端的自适应布局
+- **分页功能**：每页显示10条记录，支持完整的分页导航
+- **优化的用户体验**：
+  - 自然的列表间距和视觉分隔
+  - 适中的LOGO尺寸
+  - 文字截断处理，避免内容溢出
+  - 悬停效果和过渡动画
+  - 加载状态和空状态处理
+
+### 使用方法
+
+1. 安装并启用朋友圈插件
+2. 访问 `/friends` 路径查看新闻咨询页面
+3. 支持通过 URL 参数进行分页浏览：`/friends?page=2`
+4. 支持按链接名称筛选（如果插件支持）
+
+### 模板文件
+
+- 模板路径：`/templates/friends.html`
+- 访问路径：`/friends`
 
 ## 💬 讨论
 
