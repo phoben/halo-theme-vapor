@@ -4,12 +4,12 @@
   th:replace="~{modules/layout :: html(content = ~{::content}, page_js = ~{::page_js},_title = |标签：${category.spec.displayName}|,_head = ~{::head})}"
 >
   <th:block th:fragment="content">
-    <div class="mt-20 sm:px-8">
+    <div class="relative z-[2] mt-32 sm:px-8 lg:mt-48">
       <div class="mx-auto max-w-7xl lg:px-8">
         <div class="mx-auto max-w-7xl lg:px-8">
           <div class="relative px-4 md:px-0">
             <div class="fade-before relative z-[2] mx-auto mt-5 max-w-7xl p-4 lg:px-6">
-              <div class="mt-8">
+              <!-- <div class="mt-8">
                 <h2 class="mt-2 text-4xl font-bold">
                   [[${category.spec.displayName}]]
                   <span
@@ -17,7 +17,12 @@
                     style="color: #0887e7"
                   ></span>
                 </h2>
-              </div>
+              </div> -->
+                          <header class="fade-before mb-12">
+              <h1 class="font-slogan text-4xl font-bold text-zinc-800 sm:text-5xl dark:text-zinc-100">
+                [[${category.spec.displayName}]]
+              </h1>
+            </header>
               <!-- 隐藏分类 -->
               <!-- <div class="my-4" >
                 <th:block th:replace="~{modules/cate-filter  :: cate-filter(cate = ${category})}" />
