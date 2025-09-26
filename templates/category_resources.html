@@ -4,11 +4,11 @@
   th:replace="~{modules/layout :: html(content = ~{::content}, page_js = ~{::page_js},_title = |标签：${category.spec.displayName}|,_head = ~{::head})}"
 >
   <th:block th:fragment="content">
-    <div class="relative z-[2] mt-32 sm:px-8 lg:mt-48">
+    <div class="relative z-[3] mt-32 sm:px-8 lg:mt-48">
       <div class="mx-auto max-w-7xl lg:px-8">
         <div class="mx-auto max-w-7xl lg:px-8">
           <div class="relative px-4 md:px-0">
-            <div class="fade-before relative z-[2] mx-auto mt-5 max-w-7xl p-4 lg:px-6">
+            <div class="fade-before relative z-[3] mx-auto mt-5 max-w-7xl p-4 lg:px-6">
               <!-- <div class="mt-8">
                 <h2 class="mt-2 text-4xl font-bold">
                   [[${category.spec.displayName}]]

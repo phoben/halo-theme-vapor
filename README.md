@@ -281,3 +281,20 @@ templates/
   - 实现图片+标题+标签+日期的卡片布局
   - 鼠标悬停显示半透明播放按钮
   - 优化视频内容的视觉展示效果
+
+## 最新更新
+
+### 2024-01-XX - particlesJS 交互修复
+- **问题修复**: 解决了 main 标签阻止 particlesJS 鼠标交互的问题
+- **技术方案**: 
+  - 为 main 标签添加 `pointer-events: none;` 样式，允许事件穿透到背景层
+  - 在 main 标签内部添加包装 div 并设置 `pointer-events: auto;`，确保页面内容正常交互
+  - 保持 particlesJS 在背景层（z-index: -1）但支持鼠标交互
+- **影响范围**: layout.html 模板文件
+- **测试建议**: 验证页面内容交互正常且 particlesJS 背景效果可响应鼠标操作
+
+### 2024-01-XX - particlesJS 背景层级优化
+- 添加了 particlesJS 背景效果
+- 修复了静态资源加载问题
+- 优化了主题样式
+- 修复了 particlesJS 与页面元素的交互冲突问题，现在 particlesJS 作为背景层（z-index: -1）但仍支持鼠标交互

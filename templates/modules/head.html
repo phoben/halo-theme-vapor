@@ -58,6 +58,22 @@
   <!-- Iconify Script for Icon Support -->
   <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
 
+  <!-- Particles.js Library -->
+  <script th:src="@{/assets/particles/particles.min.js}"></script>
+  <script th:src="@{/assets/particles/particles.js}"></script>
+  <link rel="stylesheet" th:href="@{/assets/particles/particles.css}" />
+  <!-- Initialize Particles.js with config -->
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener('DOMContentLoaded', function() {
+      var configUrl = '[(${#theme.assets("/particles/particlesjs-config.json")})]';
+      if (typeof initParticles === 'function') {
+        initParticles(configUrl);
+      }
+    });
+    /*]]>*/
+  </script>
+
   <th:block th:if="${_head != null}">
     <th:block th:replace="${_head}" />
   </th:block>

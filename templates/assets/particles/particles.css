@@ -1,0 +1,14 @@
+#particles-js{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    /* 移除 pointer-events: none，让事件可以穿透到下层元素 */
+}
+
+/* particles canvas 保持交互能力 */
+#particles-js canvas {
+    pointer-events: auto;
+}
